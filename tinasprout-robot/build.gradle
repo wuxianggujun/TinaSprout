@@ -8,7 +8,7 @@ bootJar {
     // 将子模块一起打包进来
     includeEmptyDirs = true
     // 设置输出目录，相对于项目根目录
-    destinationDirectory = file("$buildDir/libs")
+    destinationDirectory = file("$rootDir/build")
 }
 
 dependencies {
