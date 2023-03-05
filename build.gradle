@@ -24,12 +24,16 @@ repositories {
 }
 
 bootJar {
-    enabled = true
     archiveBaseName = 'TinaSprout'
     archiveVersion = '0.0.1-SNAPSHOT'
-    from sourceSets.main.output
-    from configurations.runtimeClasspath.dependencies.collect { it.isDirectory() ? it : zipTree(it) }
+    // 包括所有依赖项和子模块
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    // 将子模块一起打包进来
+    includeEmptyDirs = true
+    // 设置输出目录，相对于项目根目录
+    destinationDirectory = file("$buildDir/libs")
 }
+
 
 springBoot {
     mainClass = 'com.wuxianggujun.tinasproutrobot.TinasproutRobotApplication'

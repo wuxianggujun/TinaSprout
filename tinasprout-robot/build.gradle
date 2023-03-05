@@ -6,15 +6,7 @@ springBoot {
     mainClass = 'com.wuxianggujun.tinasproutrobot.TinasproutRobotApplication'
 }
 
+
 dependencies {
     implementation project(':tinasprout-core')
-}
-bootJar {
-    enabled = false
-    archiveBaseName = 'tinasprout-robot'
-    archiveVersion = '0.0.1-SNAPSHOT'
-}
-
-jar {
-    enabled = true
 }
