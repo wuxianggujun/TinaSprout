@@ -1,18 +1,12 @@
-
-repositories {
-    mavenCentral()
-}
-
-springBoot {
-    mainClass = 'com.wuxianggujun.tinasproutcore.TinaSproutCoreApplication'
-}
-
 bootJar{
-    enabled = false
+    enabled(false)
     archiveBaseName = 'tinasprout-core'
     archiveVersion = '0.0.1-SNAPSHOT'
 }
 
 jar{
     enabled = true
+}
+
+dependencies {
 }
