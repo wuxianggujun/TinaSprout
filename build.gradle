@@ -26,6 +26,8 @@ repositories {
 bootJar {
     archiveBaseName = 'TinaSprout'
     archiveVersion = '0.0.1-SNAPSHOT'
+    from sourceSets.main.output
+    from configurations.runtimeClasspath.dependencies.collect { it.isDirectory() ? it : zipTree(it) }
 }
 
 springBoot {
@@ -37,6 +39,12 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'java'
 
+    bootJar {
+        from sourceSets.main.output
+        from configurations.runtimeClasspath.dependencies.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    
+    
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation "com.alibaba:fastjson:1.2.83"
