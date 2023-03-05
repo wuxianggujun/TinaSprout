@@ -1,1 +1,3 @@
 rootProject.name = 'TinaSprout'
+include 'tinasprout-core'
+include 'tinasprout-robot'
