@@ -2,9 +2,9 @@ repositories {
     mavenCentral()
 }
 
-springBoot {
+/*springBoot {
     mainClass = 'com.wuxianggujun.tinasproutrobot.TinasproutRobotApplication'
-}
+}*/
 
 
 dependencies {
