@@ -3,6 +3,10 @@ repositories {
 	mavenCentral()
 }
 
+springBoot {
+	mainClass = 'com.wuxianggujun.tinasproutrobot.TinasproutRobotApplication'
+}
+
 dependencies {
 	implementation project(':tinasprout-core')
 }
