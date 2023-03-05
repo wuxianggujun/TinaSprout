@@ -19,8 +19,12 @@ repositories {
 }
 
 bootJar {
-    archiveBaseName = 'app'
+    archiveBaseName = 'TinaSprout'
     archiveVersion = '0.0.1-SNAPSHOT'
+}
+
+springBoot {
+    mainClass = 'com.wuxianggujun.tinasproutrobot.TinasproutRobotApplication'
 }
 
 subprojects {

@@ -3,6 +3,10 @@ repositories {
     mavenCentral()
 }
 
+springBoot {
+    mainClass = 'com.wuxianggujun.tinasproutcore.TinaSproutCoreApplication'
+}
+
 bootJar{
     enabled = false
 }
