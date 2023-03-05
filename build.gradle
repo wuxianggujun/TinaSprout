@@ -33,7 +33,7 @@ subprojects {
     apply plugin: 'java'
 
     dependencies {
-
+        implementation 'org.springframework.boot:spring-boot-starter'
         implementation "com.alibaba:fastjson:1.2.83"
         implementation 'io.netty:netty-all:4.1.86.Final'
         implementation 'org.springframework.boot:spring-boot-starter-web'
