@@ -24,6 +24,7 @@ repositories {
 }
 
 bootJar {
+    enabled = true
     archiveBaseName = 'TinaSprout'
     archiveVersion = '0.0.1-SNAPSHOT'
     from sourceSets.main.output

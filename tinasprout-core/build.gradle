@@ -9,6 +9,8 @@ springBoot {
 
 bootJar{
     enabled = false
+    archiveBaseName = 'tinasprout-core'
+    archiveVersion = '0.0.1-SNAPSHOT'
 }
 
 jar{
