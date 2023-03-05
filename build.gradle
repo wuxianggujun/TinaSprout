@@ -4,7 +4,7 @@ buildscript {
         maven {
             url 'https://repo.huaweicloud.com/repository/maven/'
         }
-    } 
+    }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:3.0.4")
     }
@@ -13,6 +13,7 @@ buildscript {
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.0.4' apply false
+    //apply false的作用是告诉Gradle不要执行插件的逻辑，只是声明依赖
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
@@ -26,10 +27,8 @@ bootJar {
     includeEmptyDirs = true
     // 设置输出目录，相对于项目根目录
     destinationDirectory = file("$buildDir/libs")
-}*/
+}
 
-
-/*
 springBoot {
     mainClass = 'com.wuxianggujun.tinasproutrobot.TinasproutRobotApplication'
 }
@@ -41,7 +40,7 @@ allprojects {
     group 'com.wuxianggujun'
     version '1.0-SNAPSHOT'
     sourceCompatibility = '17'
-    
+
     configurations {
         compileOnly {
             extendsFrom annotationProcessor
@@ -54,7 +53,7 @@ allprojects {
             url 'https://repo.huaweicloud.com/repository/maven/'
         }
     }
-    
+
     dependencies {
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
@@ -69,20 +68,15 @@ allprojects {
 subprojects {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
-    
-    
-   /* bootJar {
-        from sourceSets.main.output
-        from configurations.runtimeClasspath.dependencies.collect { it.isDirectory() ? it : zipTree(it) }
-    }*/
-    
-   /* dependencyManagement {
+
+    dependencyManagement {
+
         imports {
-            
+            mavenBom "org.springframework.boot:spring-boot-dependencies:3.0.4"
         }
-        
-    }*/
-    
+
+    }
+
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation "com.alibaba:fastjson:1.2.83"
@@ -99,5 +93,5 @@ subprojects {
         useJUnitPlatform()
     }
 
- 
+
 }
