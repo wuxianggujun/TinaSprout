@@ -10,6 +10,6 @@ import com.wuxianggujun.tinasproutcore.core.Bot;
  **/
 public interface BotClient {
     ApiResult invokeApi(BaseApi baseApi, Bot bot);
-    
+
     void heartbeat();
 }

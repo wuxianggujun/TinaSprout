@@ -2,10 +2,11 @@ package com.wuxianggujun.tinasproutcore.core;
 
 import com.wuxianggujun.tinasproutcore.message.MessageChain;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
+
+import java.util.Date;
 
 /**
  * @author WuXiangGuJun
@@ -24,13 +25,15 @@ public class Member implements Contact {
 
     private String card;
 
+    private final String sex;
+
     private final int age;
 
     private final String area;
 
-    private final Data joinTime;
+    private final Date joinTime;
 
-    private final Data lastSentTime;
+    private final Date lastSentTime;
 
     private final String level;
 
@@ -40,11 +43,12 @@ public class Member implements Contact {
 
     private final String title;
 
-    private final Data titleExpireTime;
+    private final Date titleExpireTime;
 
     private final boolean cardChangeable;
 
     private final Bot bot;
+
 
     public String getCard() {
         return StringUtils.isEmpty(this.card) ? this.nickname : this.card;
