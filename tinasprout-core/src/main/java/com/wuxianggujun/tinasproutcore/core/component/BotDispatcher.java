@@ -3,6 +3,7 @@ package com.wuxianggujun.tinasproutcore.core.component;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wuxianggujun.tinasproutcore.api.ApiResult;
+import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.handler.EventHandler;
 import com.wuxianggujun.tinasproutcore.network.ws.WsBotClient;
 import jakarta.annotation.PostConstruct;
@@ -39,10 +40,17 @@ public class BotDispatcher {
             if (jsonObject.containsKey("echo")&&jsonObject.containsKey("status")&&jsonObject.containsKey("retcode")&&jsonObject.containsKey("data")){
                 try {
                     ApiResult apiResult = JSON.parseObject(message,ApiResult.class);
-                    CompletableFuture<ApiResult> completeFuture = WsBotClient
+                    CompletableFuture<ApiResult> completeFuture = WsBotClient.getCompletableFutureMap().get(apiResult.getEcho());
+                    if (completeFuture !=null){
+                        completeFuture.complete(apiResult);
+                    }
+                }catch (Exception e) {
+                    log.error(e.getMessage(),e);
                 }
-                
+                return;
             }
+            Bot bot = BotFactory.getBots()
+            
             
             
         }catch (Exception ex){

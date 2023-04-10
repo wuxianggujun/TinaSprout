@@ -338,17 +338,52 @@ public class Bot {
     }
 
     public int sendTempMessage(long userId, long groupId, MessageChain messageChain) {
-        ApiResult apiResult = this.botClient.invokeApi();
+        ApiResult apiResult = this.botClient.invokeApi(new SendTempMsg(userId, groupId, messageChain), this);
+        return this.getObject(apiResult.getData()).getIntValue("message_id");
     }
+
+
+    public void groupBan(long groupId) {
+        this.botClient.invokeApi(new GroupBan(groupId, true), this);
+
+    }
+
+    public void groupPardon(long groupId) {
+        this.botClient.invokeApi(new GroupBan(groupId, false), this);
+    }
+
+    public void memberBan(long groupId, long userId, long duration) {
+        this.botClient.invokeApi(new Ban(groupId, userId, duration), this);
+    }
+
+    public void memberPardon(long groupId, long userId) {
+        this.botClient.invokeApi(new Ban(groupId, userId, 0), this);
+    }
+
 
     public int sendPrivateMessage(long userId, MessageChain messageChain) {
         ApiResult apiResult = this.botClient.invokeApi(new SendPrivateMsg(userId, messageChain), this);
         return this.getObject(apiResult.getData()).getIntValue("message_id");
     }
 
+    public void deleteMsg(long messageId) {
+        this.botClient.invokeApi(new DeleteMsg(messageId), this);
+    }
 
     public void setGroupCard(long groupId, long userId, String card) {
         this.botClient.invokeApi(new SetGroupCard(groupId, userId, card), this);
+    }
+
+    public void setGroupSpecialTitle(long userId, String specialTitle, Number duration, long groupId) {
+        this.botClient.invokeApi(new SetGroupSpecialTitle(userId, specialTitle, duration, groupId), this);
+    }
+
+
+    public void flushBotInfo() {
+        ApiResult apiResult = this.botClient.invokeApi(new GetLoginInfo(), this);
+        JSONObject jsonObject = this.getObject(apiResult.getData());
+        this.botId = jsonObject.getLongValue("user_id");
+        this.botName = jsonObject.getString("nickname");
     }
 
 }

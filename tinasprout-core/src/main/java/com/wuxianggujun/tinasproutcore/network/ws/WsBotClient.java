@@ -7,10 +7,11 @@ import com.wuxianggujun.tinasproutcore.core.network.BotClient;
 import com.wuxianggujun.tinasproutcore.exception.BotException;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.PingWebSocketFrame;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -18,15 +19,12 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author WuXiangGuJun
  * @create 2023-04-09 13:51
  **/
+@Slf4j
 public class WsBotClient implements BotClient {
 
 
     private final Lock lock = new ReentrantLock();
-
-
     private static final Map<String, CompletableFuture<ApiResult>> completableFutureMap = new ConcurrentHashMap<>();
-
-
     private final Channel channel;
 
     private long lastInvokeTime;
@@ -51,20 +49,43 @@ public class WsBotClient implements BotClient {
     @Override
     public ApiResult invokeApi(BaseApi baseApi, Bot bot) {
         this.lock.lock();
-        
         try {
-            if (baseApi.needSleep()&& System.currentTimeMillis() - lastInvokeTime<1500){
+            if (baseApi.needSleep() && System.currentTimeMillis() - lastInvokeTime < 1500) {
                 try {
-                    Thread.sleep(1500 -(System.currentTimeMillis() - lastInvokeTime));
+                    Thread.sleep(1500 - (System.currentTimeMillis() - lastInvokeTime));
                 } catch (InterruptedException e) {
-                    throw new BotException(String.format("[%5]调用api出错: %s",bot.get))
+                    throw new BotException(String.format("[%s]调用api出错: %s", bot.getBotName(), e.getMessage()));
                 }
+                channel.writeAndFlush(new TextWebSocketFrame(baseApi.buildJson()));
+            } else {
+                channel.writeAndFlush(new TextWebSocketFrame(baseApi.buildJson()));
             }
+            CompletableFuture<ApiResult> completeFuture = new CompletableFuture<>();
+            completableFutureMap.put(baseApi.getEcho(), completeFuture);
+            ApiResult apiResult = getApiResult(baseApi.getEcho());
+            lastInvokeTime = System.currentTimeMillis();
+            if (apiResult == null || !"ok".equals(apiResult.getStatus())) {
+                throw new BotException(String.format("[%s]调用api出错: %s", bot.getBotName(), apiResult));
+            }
+            return apiResult;
+        } finally {
+            this.lock.unlock();
         }
-        
-        
-        return null;
     }
 
 
+    private ApiResult getApiResult(String echo) {
+        CompletableFuture<ApiResult> completeFuture = completableFutureMap.get(echo);
+        if (completeFuture == null) {
+            return null;
+        }
+        try {
+            ApiResult apiResult = completeFuture.get(1, TimeUnit.MINUTES);
+            completableFutureMap.remove(echo);
+            return apiResult;
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            log.error(e.getMessage(), e);
+            return null;
+        }
+    }
 }
