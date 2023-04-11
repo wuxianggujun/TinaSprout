@@ -33,32 +33,38 @@ public class BotDispatcher {
     public void init() {
         this.executorService = Executors.newFixedThreadPool(4);
     }
-    
-    public void handle(String message){
-        try{
+
+    public void handle(String message) {
+        try {
             JSONObject jsonObject = JSON.parseObject(message);
-            if (jsonObject.containsKey("echo")&&jsonObject.containsKey("status")&&jsonObject.containsKey("retcode")&&jsonObject.containsKey("data")){
+            if (jsonObject.containsKey("echo") && jsonObject.containsKey("status") && jsonObject.containsKey("retcode") && jsonObject.containsKey("data")) {
                 try {
-                    ApiResult apiResult = JSON.parseObject(message,ApiResult.class);
+                    ApiResult apiResult = JSON.parseObject(message, ApiResult.class);
                     CompletableFuture<ApiResult> completeFuture = WsBotClient.getCompletableFutureMap().get(apiResult.getEcho());
-                    if (completeFuture !=null){
+                    if (completeFuture != null) {
                         completeFuture.complete(apiResult);
                     }
-                }catch (Exception e) {
-                    log.error(e.getMessage(),e);
+                } catch (Exception e) {
+                    log.error(e.getMessage(), e);
                 }
                 return;
             }
-            Bot bot = BotFactory.getBots()
-            
-            
-            
-        }catch (Exception ex){
-            
+            Bot bot = BotFactory.getBots().get(jsonObject.getLong("self_id"));
+            if (bot == null) {
+                return;
+            }
+            this.executorService.submit(() -> {
+                try {
+                    for (EventHandler eventHandler : eventHandlerMap.values()) {
+                        eventHandler.handle(jsonObject, bot);
+                    }
+                } catch (Exception e) {
+                    log.error(e.getMessage(), e);
+                }
+            });
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
-        
-        
     }
-
 
 }
