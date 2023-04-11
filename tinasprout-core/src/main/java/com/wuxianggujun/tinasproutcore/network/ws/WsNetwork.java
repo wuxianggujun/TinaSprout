@@ -5,7 +5,6 @@ import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.core.component.BotDispatcher;
 import com.wuxianggujun.tinasproutcore.exception.BotException;
 import com.wuxianggujun.tinasproutcore.network.BotNetwork;
-import com.wuxianggujun.tinasproutcore.network.WsHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
