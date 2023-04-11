@@ -1,21 +1,9 @@
 package com.wuxianggujun.tinasproutcore.support;
 
-import com.zhuangxv.bot.core.component.BotDispatcher;
-import com.zhuangxv.bot.core.component.BotFactory;
-import com.zhuangxv.bot.core.component.BotInit;
-import com.zhuangxv.bot.core.component.SnowFlakeIdGenerator;
-import com.zhuangxv.bot.handler.message.GroupMessageEventHandler;
-import com.zhuangxv.bot.handler.message.GroupRecallEventHandler;
-import com.zhuangxv.bot.handler.message.MemberAddEventHandler;
-import com.zhuangxv.bot.handler.message.PrivateMessageEventHandler;
-import com.zhuangxv.bot.handler.meta.HeartbeatEventHandler;
-import com.zhuangxv.bot.injector.support.*;
-import com.zhuangxv.bot.injector.support.friend.FriendInjector;
-import com.zhuangxv.bot.injector.support.friend.TempFriendInjector;
-import com.zhuangxv.bot.injector.support.group.GroupInjector;
-import com.zhuangxv.bot.injector.support.group.MemberInjector;
-import com.zhuangxv.bot.injector.support.group.RecallMessageInjector;
-import com.zhuangxv.bot.scheduled.FlushCacheScheduled;
+import com.wuxianggujun.tinasproutcore.core.component.BotDispatcher;
+import com.wuxianggujun.tinasproutcore.core.component.BotFactory;
+import com.wuxianggujun.tinasproutcore.core.component.BotInit;
+import com.wuxianggujun.tinasproutcore.core.component.SnowFlakeIdGenerator;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
