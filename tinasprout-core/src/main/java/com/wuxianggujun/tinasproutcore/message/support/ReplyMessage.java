@@ -7,26 +7,33 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author WuXiangGuJun
- * @create 2023-04-09 14:21
+ * @create 2023-04-12 16:31
  **/
 @Data
 @NoArgsConstructor
-public class TextMessage implements Message {
+public class ReplyMessage implements Message {
+
+    private int id;
 
     private String text;
 
-    public TextMessage(String text) {
-        this.text = text;
+    private long qq;
+
+    private long seq;
+
+    public ReplyMessage(int messageId) {
+        this.id = messageId;
     }
 
     @Override
     public String toString() {
-        return text;
+        return "reply[" + id + "]";
     }
 
     @Override
     public String toMessageString() {
-        return String.format("{\"type\":\"%s\",\"data\":%s}", "text", JSON.toJSONString(this));
+        return String.format("{\"type\":\"%s\",\"data\":%s}", "reply", JSON.toJSONString(this));
     }
 
 }
+

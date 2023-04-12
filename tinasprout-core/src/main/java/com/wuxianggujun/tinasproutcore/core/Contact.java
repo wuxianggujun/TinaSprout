@@ -10,10 +10,10 @@ import com.wuxianggujun.tinasproutcore.message.MessageChain;
  **/
 public interface Contact {
 
-    default int sendMessage(Message message) {
+    default void sendMessage(Message message) {
         MessageChain messageChain = new MessageChain();
         messageChain.add(message);
-        return this.sendMessage(messageChain);
+        this.sendMessage(messageChain);
     }
 
     int sendMessage(MessageChain messageChain);

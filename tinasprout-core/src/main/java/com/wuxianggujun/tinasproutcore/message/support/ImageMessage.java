@@ -7,26 +7,32 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author WuXiangGuJun
- * @create 2023-04-09 14:21
+ * @create 2023-04-12 16:28
  **/
 @Data
 @NoArgsConstructor
-public class TextMessage implements Message {
+public class ImageMessage implements Message {
 
-    private String text;
+    private String file;
 
-    public TextMessage(String text) {
-        this.text = text;
+    private String type;
+
+    private String url;
+
+    private Integer id;
+
+    public ImageMessage(String file) {
+        this.file = file;
     }
 
     @Override
     public String toString() {
-        return text;
+        return "image[" + file + "]";
     }
 
     @Override
     public String toMessageString() {
-        return String.format("{\"type\":\"%s\",\"data\":%s}", "text", JSON.toJSONString(this));
+        return String.format("{\"type\":\"%s\",\"data\":%s}", "image", JSON.toJSONString(this));
     }
 
 }

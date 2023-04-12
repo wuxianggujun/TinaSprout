@@ -4,6 +4,12 @@ import com.wuxianggujun.tinasproutcore.core.component.BotDispatcher;
 import com.wuxianggujun.tinasproutcore.core.component.BotFactory;
 import com.wuxianggujun.tinasproutcore.core.component.BotInit;
 import com.wuxianggujun.tinasproutcore.core.component.SnowFlakeIdGenerator;
+import com.wuxianggujun.tinasproutcore.handler.message.GroupMessageEventHandler;
+import com.wuxianggujun.tinasproutcore.handler.message.GroupRecallEventHandler;
+import com.wuxianggujun.tinasproutcore.handler.message.MemberAddEventHandler;
+import com.wuxianggujun.tinasproutcore.handler.message.PrivateMessageEventHandler;
+import com.wuxianggujun.tinasproutcore.handler.meta.HeartbeatEventHandler;
+import com.wuxianggujun.tinasproutcore.injector.support.group.RecallMessageInjector;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 

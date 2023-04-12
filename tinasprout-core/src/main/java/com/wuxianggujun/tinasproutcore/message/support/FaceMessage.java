@@ -3,30 +3,28 @@ package com.wuxianggujun.tinasproutcore.message.support;
 import com.alibaba.fastjson.JSON;
 import com.wuxianggujun.tinasproutcore.message.Message;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author WuXiangGuJun
- * @create 2023-04-09 14:11
+ * @create 2023-04-12 16:27
  **/
 @Data
-@NoArgsConstructor
-public class AtMessage implements Message {
+public class FaceMessage implements Message {
 
-    private String qq;
+    private String id;
 
-    public AtMessage(String qq) {
-        this.qq = qq;
+    public FaceMessage(String id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "@" + qq + " ";
+        return "face[" + id + "]";
     }
 
     @Override
     public String toMessageString() {
-        return String.format("{\"type\":\"%s\",\"data\":%s}", "at", JSON.toJSONString(this));
+        return String.format("{\"type\":\"%s\",\"data\":%s}", "face", JSON.toJSONString(this));
     }
 
 }
