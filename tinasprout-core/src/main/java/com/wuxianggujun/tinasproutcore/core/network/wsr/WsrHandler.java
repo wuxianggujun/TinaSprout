@@ -7,7 +7,7 @@ import com.wuxianggujun.tinasproutcore.core.Group;
 import com.wuxianggujun.tinasproutcore.core.component.BotDispatcher;
 import com.wuxianggujun.tinasproutcore.core.component.BotFactory;
 import com.wuxianggujun.tinasproutcore.core.network.BotClient;
-import com.wuxianggujun.tinasproutcore.network.ws.WsBotClient;
+import com.wuxianggujun.tinasproutcore.core.network.ws.WsBotClient;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;

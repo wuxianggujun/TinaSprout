@@ -1,4 +1,4 @@
-package com.wuxianggujun.tinasproutcore.network.ws;
+package com.wuxianggujun.tinasproutcore.core.network.ws;
 
 import com.wuxianggujun.tinasproutcore.api.ApiResult;
 import com.wuxianggujun.tinasproutcore.api.BaseApi;

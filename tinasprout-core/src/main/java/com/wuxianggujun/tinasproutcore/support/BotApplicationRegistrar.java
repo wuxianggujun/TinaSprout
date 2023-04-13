@@ -9,7 +9,13 @@ import com.wuxianggujun.tinasproutcore.handler.message.GroupRecallEventHandler;
 import com.wuxianggujun.tinasproutcore.handler.message.MemberAddEventHandler;
 import com.wuxianggujun.tinasproutcore.handler.message.PrivateMessageEventHandler;
 import com.wuxianggujun.tinasproutcore.handler.meta.HeartbeatEventHandler;
+import com.wuxianggujun.tinasproutcore.injector.support.*;
+import com.wuxianggujun.tinasproutcore.injector.support.friend.FriendInjector;
+import com.wuxianggujun.tinasproutcore.injector.support.friend.TempFriendInjector;
+import com.wuxianggujun.tinasproutcore.injector.support.group.GroupInjector;
+import com.wuxianggujun.tinasproutcore.injector.support.group.MemberInjector;
 import com.wuxianggujun.tinasproutcore.injector.support.group.RecallMessageInjector;
+import com.wuxianggujun.tinasproutcore.scheduled.FlushCacheScheduled;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 

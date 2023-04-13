@@ -10,7 +10,6 @@ import com.wuxianggujun.tinasproutcore.exception.BotException;
 import com.wuxianggujun.tinasproutcore.message.CacheMessage;
 import com.wuxianggujun.tinasproutcore.message.MessageChain;
 import com.wuxianggujun.tinasproutcore.message.support.ForwardNodeMessage;
-import com.wuxianggujun.tinasproutcore.message.support.SendGroupForwardMsg;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;

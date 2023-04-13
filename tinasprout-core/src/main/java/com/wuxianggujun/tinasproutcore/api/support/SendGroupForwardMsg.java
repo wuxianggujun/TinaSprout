@@ -1,10 +1,11 @@
-package com.wuxianggujun.tinasproutcore.message.support;
+package com.wuxianggujun.tinasproutcore.api.support;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.wuxianggujun.tinasproutcore.api.BaseApi;
+import com.wuxianggujun.tinasproutcore.message.support.ForwardNodeMessage;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;

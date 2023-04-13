@@ -3,9 +3,8 @@ package com.wuxianggujun.tinasproutcore.core.network;
 import com.wuxianggujun.tinasproutcore.config.BotConfig;
 import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.core.component.BotDispatcher;
+import com.wuxianggujun.tinasproutcore.core.network.ws.WsNetwork;
 import com.wuxianggujun.tinasproutcore.core.network.wsr.WsrNetwork;
-import com.wuxianggujun.tinasproutcore.network.BotNetwork;
-import com.wuxianggujun.tinasproutcore.network.ws.WsNetwork;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
