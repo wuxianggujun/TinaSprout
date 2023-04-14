@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 public class MessageTest {
     @GroupMessageHandler(regex = "none")
     public void test(Group group, Member member, MessageChain messageChain, String message, Integer id) {
+        group.sendMessage(messageChain);
         System.out.println(group.getGroupName()+" | "+member.getNickname());
     }
 

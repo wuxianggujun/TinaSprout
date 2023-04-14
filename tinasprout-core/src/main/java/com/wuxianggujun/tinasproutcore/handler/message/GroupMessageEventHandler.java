@@ -26,7 +26,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class GroupMessageEventHandler implements EventHandler {
-
+    
     @Override
     public void handle(JSONObject jsonObject, Bot bot) {
         if (!GroupMessageEvent.isSupport(jsonObject)) {
@@ -78,6 +78,8 @@ public class GroupMessageEventHandler implements EventHandler {
             }
             return "none".equals(groupMessageHandler.regex()) || messageChain.toString().matches(groupMessageHandler.regex());
         }, "message");
+        
+        
         //占时不明白，这个游历resultList后又发送是什么意思
         for (Object result : resultList) {
             try {

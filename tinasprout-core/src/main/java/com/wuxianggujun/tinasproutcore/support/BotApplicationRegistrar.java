@@ -1,5 +1,6 @@
 package com.wuxianggujun.tinasproutcore.support;
 
+import com.wuxianggujun.tinasproutcore.command.handler.CommandEventHandler;
 import com.wuxianggujun.tinasproutcore.core.component.BotDispatcher;
 import com.wuxianggujun.tinasproutcore.core.component.BotFactory;
 import com.wuxianggujun.tinasproutcore.core.component.BotInit;
@@ -39,7 +40,7 @@ public class BotApplicationRegistrar implements ImportSelector {
                 HeartbeatEventHandler.class.getName(),
                 PrivateMessageEventHandler.class.getName(),
                 GroupMessageEventHandler.class.getName(),
-                //CommandEventHandler.class.getName(),//添加处理命令的even handler
+                CommandEventHandler.class.getName(),//添加处理命令的even handler
                 GroupRecallEventHandler.class.getName(),
                 MemberAddEventHandler.class.getName(),
                 RecallMessageInjector.class.getName(),

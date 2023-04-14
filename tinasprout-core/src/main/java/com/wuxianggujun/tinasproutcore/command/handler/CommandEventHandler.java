@@ -5,8 +5,6 @@ import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.event.message.GroupMessageEvent;
 import com.wuxianggujun.tinasproutcore.event.message.PrivateMessageEvent;
 import com.wuxianggujun.tinasproutcore.handler.EventHandler;
-import com.wuxianggujun.tinasproutcore.handler.message.GroupMessageEventHandler;
-import com.wuxianggujun.tinasproutcore.handler.message.PrivateMessageEventHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +16,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class CommandEventHandler implements EventHandler {
-    
+
     @Override
     public void handle(JSONObject jsonObject, Bot bot) {
 //        log.info(jsonObject.toString());
         if (GroupMessageEvent.isSupport(jsonObject)) {
             log.info("-----------群聊消息----------");
             GroupMessageEvent groupMessageEvent = jsonObject.toJavaObject(GroupMessageEvent.class);
-            GroupMessageEventHandler groupMessageEventHandler = new GroupMessageEventHandler();
+
 
         }
         if (PrivateMessageEvent.isSupport(jsonObject)) {
             log.info("-----------私聊消息----------");
-            PrivateMessageEventHandler privateMessageEventHandler = new PrivateMessageEventHandler();
-            privateMessageEventHandler.handle(jsonObject, bot);
+            
         }
     } 
     

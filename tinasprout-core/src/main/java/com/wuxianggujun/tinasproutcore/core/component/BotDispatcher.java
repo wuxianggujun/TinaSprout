@@ -57,7 +57,10 @@ public class BotDispatcher {
             this.executorService.submit(() -> {
                 try {
                     for (EventHandler eventHandler : eventHandlerMap.values()) {
-                        eventHandler.handle(jsonObject, bot);
+                        //先进行预处理判断 true才进行下一步
+                        if (eventHandler.preHandle(jsonObject, bot)) {
+                            eventHandler.handle(jsonObject, bot);
+                        }
                     }
                 } catch (Exception e) {
                     log.error(e.getMessage(), e);
