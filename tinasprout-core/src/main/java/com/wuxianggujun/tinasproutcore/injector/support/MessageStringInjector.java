@@ -13,11 +13,10 @@ import com.wuxianggujun.tinasproutcore.message.MessageTypeHandle;
 import java.util.List;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-13 17:12
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class MessageStringInjector implements ObjectInjector<String> {
-
     @Override
     public Class<String> getClassType() {
         return String.class;
@@ -28,25 +27,25 @@ public class MessageStringInjector implements ObjectInjector<String> {
         return new String[]{"message"};
     }
 
-
     @Override
     public String getObject(BaseEvent event, Bot bot) {
         MessageChain messageChain = null;
-        if (event instanceof GroupMessageEvent groupMessageEvent) {
+        if (event instanceof GroupMessageEvent) {
             messageChain = new MessageChain();
+            GroupMessageEvent groupMessageEvent = (GroupMessageEvent) event;
             for (int i = 0; i < groupMessageEvent.getMessage().size(); i++) {
                 messageChain.add(MessageTypeHandle.getMessage(groupMessageEvent.getMessage().getJSONObject(i)));
             }
         }
-
-        if (event instanceof PrivateMessageEvent privateMessageEvent) {
+        if (event instanceof PrivateMessageEvent) {
+            PrivateMessageEvent privateMessageEvent = (PrivateMessageEvent) event;
             messageChain = new MessageChain();
             for (int i = 0; i < privateMessageEvent.getMessage().size(); i++) {
                 messageChain.add(MessageTypeHandle.getMessage(privateMessageEvent.getMessage().getJSONObject(i)));
             }
         }
-
-        if (event instanceof GroupRecallEvent groupRecallEvent) {
+        if (event instanceof GroupRecallEvent) {
+            GroupRecallEvent groupRecallEvent = (GroupRecallEvent) event;
             List<CacheMessage> groupCacheMessageChain = bot.getGroupCacheMessageChain(groupRecallEvent.getGroupId(), groupRecallEvent.getMessageId(), 1);
             if (groupCacheMessageChain.isEmpty()) {
                 return null;

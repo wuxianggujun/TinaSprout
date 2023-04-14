@@ -6,20 +6,19 @@ import com.wuxianggujun.tinasproutcore.message.Message;
 import com.wuxianggujun.tinasproutcore.message.MessageChain;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-09 22:17
- **/
+ * @author jiluo
+ * @since 2021-09-08
+ */
 @Getter
 public class ForwardNodeMessage implements Message {
 
-
-    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     private String id;
 
     private String uin;
-
 
     private String name;
 
@@ -39,7 +38,6 @@ public class ForwardNodeMessage implements Message {
     public String toString() {
         return "node[" + JSON.toJSONString(this) + "]";
     }
-
 
     @Override
     public String toMessageString() {

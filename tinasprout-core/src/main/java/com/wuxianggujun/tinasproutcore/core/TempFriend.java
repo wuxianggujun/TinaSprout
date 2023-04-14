@@ -3,9 +3,9 @@ package com.wuxianggujun.tinasproutcore.core;
 import com.wuxianggujun.tinasproutcore.message.MessageChain;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-12 16:42
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class TempFriend implements Contact {
 
     private final long userId;

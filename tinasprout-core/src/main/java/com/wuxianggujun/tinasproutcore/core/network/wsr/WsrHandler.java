@@ -24,10 +24,9 @@ import org.springframework.util.StringUtils;
 import java.util.Map;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-11 15:37
- **/
-
+ * @author xiaoxu
+ * @since 2022/5/24 15:42
+ */
 @Slf4j
 @RequiredArgsConstructor
 public class WsrHandler extends SimpleChannelInboundHandler<Object> {
@@ -38,7 +37,8 @@ public class WsrHandler extends SimpleChannelInboundHandler<Object> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) {
-        if (msg instanceof FullHttpRequest request) {
+        if (msg instanceof FullHttpRequest) {
+            FullHttpRequest request = (FullHttpRequest) msg;
             if (!request.decoderResult().isSuccess()) {
                 sendResponse(ctx, request, new DefaultFullHttpResponse(request.protocolVersion(), HttpResponseStatus.BAD_REQUEST, ctx.alloc().buffer()));
                 return;
@@ -75,11 +75,11 @@ public class WsrHandler extends SimpleChannelInboundHandler<Object> {
                 }
             }
             WebSocketServerHandshakerFactory factory = new WebSocketServerHandshakerFactory(getWebSocketLocation(request), null, true, 5 * 1024 * 1024);
-            WebSocketServerHandshaker handshake = factory.newHandshaker(request);
-            if (handshake == null) {
+            WebSocketServerHandshaker handshaker = factory.newHandshaker(request);
+            if (handshaker == null) {
                 WebSocketServerHandshakerFactory.sendUnsupportedVersionResponse(ctx.channel());
             } else {
-                handshake.handshake(ctx.channel(), request);
+                handshaker.handshake(ctx.channel(), request);
                 BotClient botClient = new WsBotClient(ctx.channel());
                 Bot bot = new Bot(this.botConfig, botClient);
                 new Thread(() -> {
@@ -113,8 +113,10 @@ public class WsrHandler extends SimpleChannelInboundHandler<Object> {
                     }
                 }).start();
             }
-        } else if (msg instanceof WebSocketFrame frame) {
-            if (frame instanceof TextWebSocketFrame textFrame) {
+        } else if (msg instanceof WebSocketFrame) {
+            WebSocketFrame frame = (WebSocketFrame) msg;
+            if (frame instanceof TextWebSocketFrame) {
+                TextWebSocketFrame textFrame = (TextWebSocketFrame) frame;
                 this.botDispatcher.handle(textFrame.text());
             } else if (frame instanceof CloseWebSocketFrame) {
                 ctx.close();
@@ -143,7 +145,8 @@ public class WsrHandler extends SimpleChannelInboundHandler<Object> {
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        if (evt instanceof IdleStateEvent idleStateEvent) {
+        if (evt instanceof IdleStateEvent) {
+            IdleStateEvent idleStateEvent = (IdleStateEvent) evt;
             if (idleStateEvent.state() == IdleState.WRITER_IDLE) {
                 ctx.writeAndFlush(new PingWebSocketFrame());
             }

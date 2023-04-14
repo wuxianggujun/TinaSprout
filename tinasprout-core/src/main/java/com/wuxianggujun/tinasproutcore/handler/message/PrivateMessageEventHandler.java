@@ -18,9 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-12 16:19
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Slf4j
 public class PrivateMessageEventHandler implements EventHandler {
     @Override

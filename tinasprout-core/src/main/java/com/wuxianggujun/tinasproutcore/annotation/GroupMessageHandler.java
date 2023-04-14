@@ -5,16 +5,16 @@ import com.wuxianggujun.tinasproutcore.utilEnum.IgnoreItselfEnum;
 import java.lang.annotation.*;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-11 14:29
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface GroupMessageHandler {
 
     /**
-     * 限制bot 参数为bot qq 0为不限制
+     * 限制bot 参数为bot qq  0为不限制
      */
     long bot() default 0;
 

@@ -3,13 +3,18 @@ package com.wuxianggujun.tinasproutcore.message;
 import lombok.Data;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-09 15:37
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
+/**
+ * @author xiaoxu
+ * @since 2021/8/11 3:41 下午
+ */
 @Data
 public class CacheMessage {
 
     private Long senderId;
 
     private MessageChain messageChain;
+
 }

@@ -3,9 +3,9 @@ package com.wuxianggujun.tinasproutcore.api.support;
 import com.wuxianggujun.tinasproutcore.api.BaseApi;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-09 20:29
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class GetFriends extends BaseApi {
 
     public GetFriends() {
@@ -21,4 +21,5 @@ public class GetFriends extends BaseApi {
     public Object getParams() {
         return "";
     }
+
 }

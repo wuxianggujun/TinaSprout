@@ -6,9 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-12 16:27
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Data
 @NoArgsConstructor
 public class RecordMessage implements Message {

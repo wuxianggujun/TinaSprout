@@ -1,19 +1,18 @@
 package com.wuxianggujun.tinasproutcore.core;
 
-
 import com.wuxianggujun.tinasproutcore.message.Message;
 import com.wuxianggujun.tinasproutcore.message.MessageChain;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-09 14:01
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public interface Contact {
 
-    default void sendMessage(Message message) {
+    default int sendMessage(Message message) {
         MessageChain messageChain = new MessageChain();
         messageChain.add(message);
-        this.sendMessage(messageChain);
+        return this.sendMessage(messageChain);
     }
 
     int sendMessage(MessageChain messageChain);

@@ -5,21 +5,20 @@ import com.wuxianggujun.tinasproutcore.annotation.GroupRecallHandler;
 import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.core.component.BotFactory;
 import com.wuxianggujun.tinasproutcore.event.message.GroupRecallEvent;
+import com.wuxianggujun.tinasproutcore.handler.EventHandler;
 import com.wuxianggujun.tinasproutcore.message.Message;
 import com.wuxianggujun.tinasproutcore.message.MessageChain;
 import com.wuxianggujun.tinasproutcore.util.ArrayUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.wuxianggujun.tinasproutcore.handler.EventHandler;
 
 import java.util.List;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-12 16:51
- **/
-
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class GroupRecallEventHandler implements EventHandler {

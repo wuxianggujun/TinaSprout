@@ -9,9 +9,9 @@ import org.springframework.util.StringUtils;
 import java.util.Date;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-09 15:13
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @AllArgsConstructor
 @Getter
 @Slf4j
@@ -49,7 +49,6 @@ public class Member implements Contact {
 
     private final Bot bot;
 
-
     public String getCard() {
         return StringUtils.isEmpty(this.card) ? this.nickname : this.card;
     }
@@ -80,4 +79,5 @@ public class Member implements Contact {
             return -1;
         }
     }
+
 }

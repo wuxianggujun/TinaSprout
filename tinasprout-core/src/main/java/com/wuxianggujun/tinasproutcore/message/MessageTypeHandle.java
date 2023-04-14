@@ -5,9 +5,9 @@ import com.wuxianggujun.tinasproutcore.message.support.*;
 import org.springframework.util.StringUtils;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-12 16:25
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class MessageTypeHandle {
 
     public static Message getMessage(JSONObject jsonObject) {
@@ -20,19 +20,34 @@ public class MessageTypeHandle {
         }
         Class<? extends Message> messageClass;
         switch (type) {
-            case "text" -> messageClass = TextMessage.class;
-            case "face" -> messageClass = FaceMessage.class;
-            case "record" -> messageClass = RecordMessage.class;
-            case "image" -> messageClass = ImageMessage.class;
-            case "at" -> messageClass = AtMessage.class;
-            case "video" -> messageClass = VideoMessage.class;
-            case "share" -> messageClass = ShareMessage.class;
-            case "reply" -> messageClass = ReplyMessage.class;
-            default -> {
+            case "text":
+                messageClass = TextMessage.class;
+                break;
+            case "face":
+                messageClass = FaceMessage.class;
+                break;
+            case "record":
+                messageClass = RecordMessage.class;
+                break;
+            case "image":
+                messageClass = ImageMessage.class;
+                break;
+            case "at":
+                messageClass = AtMessage.class;
+                break;
+            case "video":
+                messageClass = VideoMessage.class;
+                break;
+            case "share":
+                messageClass = ShareMessage.class;
+                break;
+            case "reply":
+                messageClass = ReplyMessage.class;
+                break;
+            default:
                 return new UnknownMessage() {{
                     setJson(jsonObject.toJSONString());
                 }};
-            }
         }
         return jsonObject.getObject("data", messageClass);
     }

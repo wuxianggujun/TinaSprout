@@ -7,21 +7,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-10 19:25
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class GetMemberInfo extends BaseApi {
-    
-    private final GetMemberInfo.Param param;
-    
+
+    private final Param param;
+
     public GetMemberInfo(long groupId, long userId) {
-        this.param = new GetMemberInfo.Param();
+        this.param = new Param();
         this.param.setGroupId(groupId);
         this.param.setUserId(userId);
         this.param.setNoCache(false);
-    }  
-    public GetMemberInfo(long groupId, long userId,boolean noCache) {
-        this.param = new GetMemberInfo.Param();
+    }
+
+    public GetMemberInfo(long groupId, long userId, boolean noCache) {
+        this.param = new Param();
         this.param.setGroupId(groupId);
         this.param.setUserId(userId);
         this.param.setNoCache(noCache);
@@ -36,7 +37,7 @@ public class GetMemberInfo extends BaseApi {
     public Object getParams() {
         return param;
     }
-    
+
     @Data
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Param {

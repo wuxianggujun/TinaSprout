@@ -9,9 +9,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.util.Collection;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-13 17:49
- **/
+ * @author xiaoxu
+ * @since 2021/9/3 9:54 上午
+ */
 @Slf4j
 public class FlushCacheScheduled {
 

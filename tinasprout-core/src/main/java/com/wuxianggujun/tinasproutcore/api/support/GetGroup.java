@@ -7,16 +7,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-09 21:46
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class GetGroup extends BaseApi {
-    
-    private final GetGroup.Param param;
-    
+
+    private final Param param;
+
     public GetGroup(long groupId) {
-       this.param = new GetGroup.Param();
-       this.param.setGroupId(groupId);
+        this.param = new Param();
+        this.param.setGroupId(groupId);
     }
 
     @Override
@@ -28,14 +28,13 @@ public class GetGroup extends BaseApi {
     public Object getParams() {
         return param;
     }
-    
+
     @Data
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Param{
-        
+    public static class Param {
+
         @JSONField(name = "group_id")
         private long groupId;
-        
+
     }
-    
 }

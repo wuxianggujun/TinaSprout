@@ -7,9 +7,9 @@ import com.wuxianggujun.tinasproutcore.event.message.MessageEvent;
 import com.wuxianggujun.tinasproutcore.injector.ObjectInjector;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-13 17:47
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class MessageIdIntInjector implements ObjectInjector<Integer> {
     @Override
     public Class<Integer> getClassType() {
@@ -23,11 +23,11 @@ public class MessageIdIntInjector implements ObjectInjector<Integer> {
 
     @Override
     public Integer getObject(BaseEvent event, Bot bot) {
-        if (event instanceof MessageEvent messageEvent) {
-            return messageEvent.getMessageId();
+        if (event instanceof MessageEvent) {
+            return ((MessageEvent) event).getMessageId();
         }
-        if (event instanceof GroupRecallEvent groupRecallEvent) {
-            return groupRecallEvent.getMessageId();
+        if (event instanceof GroupRecallEvent) {
+            return ((GroupRecallEvent) event).getMessageId();
         }
         return null;
     }

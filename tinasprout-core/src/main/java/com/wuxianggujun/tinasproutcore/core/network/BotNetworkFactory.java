@@ -1,5 +1,6 @@
 package com.wuxianggujun.tinasproutcore.core.network;
 
+
 import com.wuxianggujun.tinasproutcore.config.BotConfig;
 import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.core.component.BotDispatcher;
@@ -11,9 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-11 15:26
- **/
+ * @author xiaoxu
+ * @since 2022/5/19 16:24
+ */
 @Slf4j
 public class BotNetworkFactory {
 
@@ -34,4 +35,5 @@ public class BotNetworkFactory {
             botNetwork.init(botConfig, bots, botDispatcher);
         }
     }
+
 }

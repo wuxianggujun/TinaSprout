@@ -8,7 +8,7 @@ import com.wuxianggujun.tinasproutcore.core.component.BotDispatcher;
 import com.wuxianggujun.tinasproutcore.core.component.BotFactory;
 import com.wuxianggujun.tinasproutcore.core.network.BotClient;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.DefaultHttpHeaders;
@@ -26,11 +26,11 @@ import java.net.URISyntaxException;
 import java.util.Map;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-03-04 20:00
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Slf4j
-@ChannelHandler.Sharable
+@Sharable
 @RequiredArgsConstructor
 public class WsHandler extends SimpleChannelInboundHandler<Object> {
 
@@ -122,8 +122,10 @@ public class WsHandler extends SimpleChannelInboundHandler<Object> {
             }
             return;
         }
-        if (msg instanceof WebSocketFrame frame) {
-            if (frame instanceof TextWebSocketFrame textFrame) {
+        if (msg instanceof WebSocketFrame) {
+            WebSocketFrame frame = (WebSocketFrame) msg;
+            if (frame instanceof TextWebSocketFrame) {
+                TextWebSocketFrame textFrame = (TextWebSocketFrame) frame;
                 this.botDispatcher.handle(textFrame.text());
             } else if (frame instanceof CloseWebSocketFrame) {
                 ch.close();
@@ -133,7 +135,8 @@ public class WsHandler extends SimpleChannelInboundHandler<Object> {
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        if (evt instanceof IdleStateEvent idleStateEvent) {
+        if (evt instanceof IdleStateEvent) {
+            IdleStateEvent idleStateEvent = (IdleStateEvent) evt;
             if (idleStateEvent.state() == IdleState.WRITER_IDLE) {
                 ctx.writeAndFlush(new PingWebSocketFrame());
             }

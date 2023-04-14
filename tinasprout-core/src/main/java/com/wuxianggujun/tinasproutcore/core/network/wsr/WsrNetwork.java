@@ -21,16 +21,16 @@ import java.net.URI;
 import java.util.Map;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-11 15:32
- **/
+ * @author xiaoxu
+ * @since 2022/5/24 15:40
+ */
 @Slf4j
 public class WsrNetwork implements BotNetwork {
+
     @Override
     public void init(BotConfig botConfig, Map<Long, Bot> bots, BotDispatcher botDispatcher) {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
-
 
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();
@@ -38,7 +38,7 @@ public class WsrNetwork implements BotNetwork {
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
+                        protected void initChannel(SocketChannel ch) {
                             ch.pipeline()
                                     .addLast(new HttpServerCodec())
                                     .addLast(new HttpObjectAggregator(1024 * 1024 * 100))
@@ -53,4 +53,5 @@ public class WsrNetwork implements BotNetwork {
             log.error(e.getMessage(), e);
         }
     }
+
 }

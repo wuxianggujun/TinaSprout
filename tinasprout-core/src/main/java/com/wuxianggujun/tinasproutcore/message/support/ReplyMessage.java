@@ -6,9 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-12 16:31
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Data
 @NoArgsConstructor
 public class ReplyMessage implements Message {
@@ -36,4 +36,3 @@ public class ReplyMessage implements Message {
     }
 
 }
-

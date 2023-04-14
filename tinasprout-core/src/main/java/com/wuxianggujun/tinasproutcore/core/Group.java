@@ -8,11 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-
 /**
- * @author WuXiangGuJun
- * @create 2023-04-09 15:10
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @AllArgsConstructor
 @Getter
 @Slf4j
@@ -24,7 +23,6 @@ public class Group implements Contact {
 
     private final Bot bot;
 
-
     public Member getMember(long userId) {
         try {
             return this.bot.getMember(this.groupId, userId);
@@ -33,7 +31,6 @@ public class Group implements Contact {
             return null;
         }
     }
-
 
     @Override
     public int sendMessage(MessageChain messageChain) {
@@ -59,5 +56,4 @@ public class Group implements Contact {
     public void setGroupSpecialTitle(long userId, String specialTitle, Number duration) {
         this.bot.setGroupSpecialTitle(userId, specialTitle, duration, this.groupId);
     }
-
 }

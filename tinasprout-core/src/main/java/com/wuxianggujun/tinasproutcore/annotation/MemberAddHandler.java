@@ -3,9 +3,9 @@ package com.wuxianggujun.tinasproutcore.annotation;
 import java.lang.annotation.*;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-11 14:45
- **/
+ * @author xiaoxu
+ * @since 2021/8/9 11:15
+ */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

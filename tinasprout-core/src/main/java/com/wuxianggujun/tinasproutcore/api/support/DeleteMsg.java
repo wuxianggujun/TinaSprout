@@ -7,15 +7,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-10 19:13
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class DeleteMsg extends BaseApi {
 
-    private final DeleteMsg.Param param;
+    private final Param param;
 
     public DeleteMsg(long messageId) {
-        this.param = new DeleteMsg.Param();
+        this.param = new Param();
         this.param.setMessageId(messageId);
     }
 
@@ -29,12 +29,12 @@ public class DeleteMsg extends BaseApi {
         return param;
     }
 
-
     @Data
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Param {
 
         @JSONField(name = "message_id")
         private long messageId;
+
     }
 }

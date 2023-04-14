@@ -2,17 +2,33 @@ package com.wuxianggujun.tinasproutcore.config;
 
 import org.springframework.core.env.*;
 
-import javax.lang.model.element.Name;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-11 15:00
+ * @author xiaoxu
+ * @since 2020/10/10
  **/
 public class PropertySourcesUtils {
+
+    /**
+     * 获取属性 {@link Properties}
+     *
+     * @param propertySources {@link PropertySource}
+     * @param prefix          属性前缀
+     * @return 属性视图
+     * @see Properties
+     */
+    public static Map<String, Object> getPrefixedProperties(Iterable<PropertySource<?>> propertySources, String prefix) {
+        MutablePropertySources mutablePropertySources = new MutablePropertySources();
+        for (PropertySource<?> source : propertySources) {
+            mutablePropertySources.addLast(source);
+        }
+        return getPrefixedProperties(mutablePropertySources, prefix);
+
+    }
 
     /**
      * 获取属性 {@link Properties}
@@ -51,9 +67,8 @@ public class PropertySourcesUtils {
      * @param prefix 前缀
      * @return 前缀
      */
-    private static String buildPrefix(String prefix) {
+    public static String buildPrefix(String prefix) {
         return prefix.endsWith(".") ? prefix : (prefix + ".");
     }
-
 
 }

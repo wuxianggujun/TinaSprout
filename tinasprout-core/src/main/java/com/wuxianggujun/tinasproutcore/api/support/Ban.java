@@ -7,15 +7,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-10 19:07
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class Ban extends BaseApi {
 
-    private final Ban.Param param;
+    private final Param param;
 
     public Ban(long groupId, long userId, long duration) {
-        this.param = new Ban.Param();
+        this.param = new Param();
         this.param.setGroupId(groupId);
         this.param.setUserId(userId);
         this.param.setDuration(duration);
@@ -30,15 +30,19 @@ public class Ban extends BaseApi {
     public Object getParams() {
         return param;
     }
-    
+
     @Data
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Param {
+
         @JSONField(name = "group_id")
         private long groupId;
+
         @JSONField(name = "user_id")
         private long userId;
+
         @JSONField(name = "duration")
         private long duration;
+
     }
 }

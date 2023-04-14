@@ -1,8 +1,6 @@
 package com.wuxianggujun.tinasproutcore.core.component;
 
 /**
- * 雪花算法
- *
  * @author xiaoxu
  * @since 2020/10/14
  **/

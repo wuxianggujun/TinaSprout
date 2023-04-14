@@ -1,6 +1,5 @@
 package com.wuxianggujun.tinasproutcore.api;
 
-
 import com.alibaba.fastjson.JSON;
 import com.wuxianggujun.tinasproutcore.core.component.BotFactory;
 import com.wuxianggujun.tinasproutcore.core.component.IdGenerator;
@@ -11,9 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-05 8:57
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public abstract class BaseApi {
 
     public abstract String getAction();
@@ -27,7 +26,7 @@ public abstract class BaseApi {
     private String echo = null;
 
     public String getEcho() {
-        if (StringUtils.hasText(echo)) {
+        if (StringUtils.isEmpty(echo)) {
             IdGenerator idGenerator = BotFactory.getBeanByClass(IdGenerator.class);
             Assert.notNull(idGenerator, "IdGenerator can not be null.");
             this.echo = idGenerator.createStrId();
@@ -42,6 +41,5 @@ public abstract class BaseApi {
         map.put("echo", this.getEcho());
         return JSON.toJSONString(map);
     }
-
 
 }

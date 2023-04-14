@@ -16,9 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-12 16:54
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class MemberAddEventHandler implements EventHandler {

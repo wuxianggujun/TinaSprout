@@ -5,14 +5,14 @@ import com.wuxianggujun.tinasproutcore.annotation.GroupMessageHandler;
 import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.core.component.BotFactory;
 import com.wuxianggujun.tinasproutcore.event.message.GroupMessageEvent;
-import com.wuxianggujun.tinasproutcore.message.Message;
+import com.wuxianggujun.tinasproutcore.handler.EventHandler;
 import com.wuxianggujun.tinasproutcore.message.CacheMessage;
+import com.wuxianggujun.tinasproutcore.message.Message;
 import com.wuxianggujun.tinasproutcore.message.MessageChain;
 import com.wuxianggujun.tinasproutcore.message.MessageTypeHandle;
 import com.wuxianggujun.tinasproutcore.message.support.AtMessage;
 import com.wuxianggujun.tinasproutcore.util.ArrayUtils;
 import com.wuxianggujun.tinasproutcore.utilEnum.IgnoreItselfEnum;
-import com.wuxianggujun.tinasproutcore.handler.EventHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-12 16:46
- **/
-
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class GroupMessageEventHandler implements EventHandler {
@@ -53,7 +52,7 @@ public class GroupMessageEventHandler implements EventHandler {
             }
             if (groupMessageHandler.ignoreItself().equals(IgnoreItselfEnum.IGNORE_ITSELF) && "message_sent".equals(groupMessageEvent.getPostType())) {
                 return false;
-            } else if (groupMessageHandler.ignoreItself().equals(IgnoreItselfEnum.ONLY_ITSELF) && !"message_sent".equals(groupMessageEvent.getPostType())) {
+            } else if (groupMessageHandler.ignoreItself().equals(IgnoreItselfEnum.ONLY_ITSELF) && !"message_sent".equals(groupMessageEvent.getPostType())){
                 return false;
             }
             if (groupMessageHandler.groupIds().length > 0 && !ArrayUtils.contain(groupMessageHandler.groupIds(), groupMessageEvent.getGroupId())) {

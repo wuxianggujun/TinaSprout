@@ -5,9 +5,9 @@ import com.wuxianggujun.tinasproutcore.message.Message;
 import lombok.Data;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-12 16:27
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Data
 public class FaceMessage implements Message {
 

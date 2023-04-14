@@ -8,9 +8,9 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-12 16:12
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
@@ -21,7 +21,6 @@ public class HeartbeatEvent extends BaseEvent {
 
     @JSONField(name = "interval")
     private Long interval;
-
 
     public static boolean isSupport(JSONObject jsonObject) {
         return ("meta_event".equals(jsonObject.getString("post_type"))

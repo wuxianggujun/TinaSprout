@@ -7,15 +7,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-10 19:00
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class GroupBan extends BaseApi {
 
-    private final GroupBan.Param param;
+    private final Param param;
 
     public GroupBan(long groupId, boolean enable) {
-        this.param = new GroupBan.Param();
+        this.param = new Param();
         this.param.setGroupId(groupId);
         this.param.setEnable(enable);
     }
@@ -33,11 +33,12 @@ public class GroupBan extends BaseApi {
     @Data
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Param {
+
         @JSONField(name = "group_id")
         private long groupId;
 
         @JSONField(name = "enable")
         private boolean enable = true;
-    }
 
+    }
 }

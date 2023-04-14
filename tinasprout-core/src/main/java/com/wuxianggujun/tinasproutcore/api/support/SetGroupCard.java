@@ -7,15 +7,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-09 15:29
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class SetGroupCard extends BaseApi {
 
-    private final SetGroupCard.Param param;
+    private final Param param;
 
     public SetGroupCard(long groupId, long userId, String card) {
-        this.param = new SetGroupCard.Param();
+        this.param = new Param();
         this.param.setGroupId(groupId);
         this.param.setUserId(userId);
         this.param.setCard(card);
@@ -31,7 +31,6 @@ public class SetGroupCard extends BaseApi {
         return param;
     }
 
-
     @Data
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Param {
@@ -46,5 +45,4 @@ public class SetGroupCard extends BaseApi {
         private String card;
 
     }
-
 }

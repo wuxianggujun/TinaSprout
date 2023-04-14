@@ -7,9 +7,9 @@ import com.wuxianggujun.tinasproutcore.injector.ObjectInjector;
 import com.wuxianggujun.tinasproutcore.injector.object.RecallMessage;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-12 16:56
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class RecallMessageInjector implements ObjectInjector<RecallMessage> {
     @Override
     public Class<RecallMessage> getClassType() {
@@ -23,7 +23,8 @@ public class RecallMessageInjector implements ObjectInjector<RecallMessage> {
 
     @Override
     public RecallMessage getObject(BaseEvent event, Bot bot) {
-        if (event instanceof GroupRecallEvent groupRecallEvent) {
+        if (event instanceof GroupRecallEvent) {
+            GroupRecallEvent groupRecallEvent = (GroupRecallEvent) event;
             RecallMessage recallMessage = new RecallMessage();
             recallMessage.setSenderId(groupRecallEvent.getUserId());
             recallMessage.setOperatorId(groupRecallEvent.getOperatorId());

@@ -21,9 +21,10 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-08 22:53
- **/@Slf4j
+ * @author xiaoxu
+ * @since 2022/5/19 16:33
+ */
+@Slf4j
 public class WsNetwork implements BotNetwork {
 
     private final Bootstrap clientBootstrap = new Bootstrap();

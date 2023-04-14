@@ -26,9 +26,9 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-05 9:06
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Slf4j
 public class BotFactory implements ApplicationContextAware, DisposableBean {
 
@@ -37,9 +37,7 @@ public class BotFactory implements ApplicationContextAware, DisposableBean {
     private static ConfigurableEnvironment environment;
 
     private static ConfigurableApplicationContext applicationContext;
-
     private static final List<HandlerMethod> handlerMethodList = new ArrayList<>();
-
     private static Map<String, Map<Class<?>, ObjectInjector<?>>> objectInjectorMap;
 
     @Override
@@ -55,10 +53,9 @@ public class BotFactory implements ApplicationContextAware, DisposableBean {
 
     @Override
     public void destroy() {
-        log.info("Clear ApplicationContext:" + applicationContext);
+        log.info("clear ApplicationContext:" + applicationContext);
         applicationContext = null;
     }
-
 
     @SuppressWarnings("all")
     public static void initHandlerMethod() {
@@ -99,11 +96,10 @@ public class BotFactory implements ApplicationContextAware, DisposableBean {
     public static void initBot() {
         BotDispatcher botDispatcher = BotFactory.getBeanByClass(BotDispatcher.class);
         if (botDispatcher == null) {
-            throw new BotException("BotDispatcher初始化失败!");
+            throw new BotException("BotDispatcher初始化失败");
         }
         String configKey = "bot";
         List<BotConfig> botConfigs = null;
-
         if (PropertySourcesUtils.getPrefixedProperties(BotFactory.environment.getPropertySources(), configKey).size() != 0
                 || PropertySourcesUtils.getPrefixedProperties(BotFactory.environment.getPropertySources(), configKey + "[0]").size() != 0) {
             Binder binder = Binder.get(BotFactory.environment);
@@ -182,7 +178,6 @@ public class BotFactory implements ApplicationContextAware, DisposableBean {
         return resultList;
     }
 
-
     public static ConfigurableApplicationContext getApplicationContext() {
         return applicationContext;
     }
@@ -200,5 +195,4 @@ public class BotFactory implements ApplicationContextAware, DisposableBean {
         }
         return applicationContext.getBeansOfType(tClass);
     }
-
 }

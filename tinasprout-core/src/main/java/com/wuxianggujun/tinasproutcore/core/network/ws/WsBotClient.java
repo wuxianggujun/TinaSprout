@@ -1,5 +1,6 @@
 package com.wuxianggujun.tinasproutcore.core.network.ws;
 
+
 import com.wuxianggujun.tinasproutcore.api.ApiResult;
 import com.wuxianggujun.tinasproutcore.api.BaseApi;
 import com.wuxianggujun.tinasproutcore.core.Bot;
@@ -16,9 +17,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-09 13:51
- **/
+ * @author xiaoxu
+ * @since 2021/5/27 14:19
+ */
 @Slf4j
 public class WsBotClient implements BotClient {
 

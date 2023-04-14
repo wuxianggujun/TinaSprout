@@ -5,9 +5,9 @@ import com.wuxianggujun.tinasproutcore.event.BaseEvent;
 import com.wuxianggujun.tinasproutcore.injector.ObjectInjector;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-13 17:48
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class BotInjector implements ObjectInjector<Bot> {
     @Override
     public Class<Bot> getClassType() {

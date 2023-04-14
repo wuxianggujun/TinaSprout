@@ -7,21 +7,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-10 19:17
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class SetGroupSpecialTitle extends BaseApi {
 
-    private final SetGroupSpecialTitle.Param param;
+    private final Param param;
 
-    public SetGroupSpecialTitle(long userId, String specialTitle, Number duration, long groupId) {
-        this.param = new SetGroupSpecialTitle.Param();
+    public SetGroupSpecialTitle(long userId, String specialTitle, Number duration, long groupId){
+        this.param = new Param();
         this.param.setUserId(userId);
         this.param.setSpecialTitle(specialTitle);
         this.param.setDuration(duration);
         this.param.setGroupId(groupId);
     }
-
     @Override
     public String getAction() {
         return "set_group_special_title";
@@ -32,7 +31,6 @@ public class SetGroupSpecialTitle extends BaseApi {
         return param;
     }
 
-
     @Data
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Param {
@@ -42,10 +40,11 @@ public class SetGroupSpecialTitle extends BaseApi {
 
         @JSONField(name = "user_id")
         private long userId;
+
         @JSONField(name = "special_title")
         private String specialTitle;
+
         @JSONField(name = "duration")
         private Number duration;
-
     }
 }

@@ -10,23 +10,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-09 14:44
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class SendPrivateMsg extends BaseApi {
 
-    private final SendPrivateMsg.Param param;
-
+    private final Param param;
 
     public SendPrivateMsg(long userId, MessageChain messageChain) {
-        this.param = new SendPrivateMsg.Param();
+        this.param = new Param();
         this.param.setUserId(userId);
         this.param.setMessage(JSON.parseArray(messageChain.toMessageString()));
         this.param.setAutoEscape(false);
     }
 
     public SendPrivateMsg(long userId, MessageChain messageChain, boolean autoEscape) {
-        this.param = new SendPrivateMsg.Param();
+        this.param = new Param();
         this.param.setUserId(userId);
         this.param.setMessage(JSON.parseArray(messageChain.toMessageString()));
         this.param.setAutoEscape(autoEscape);
@@ -47,7 +46,6 @@ public class SendPrivateMsg extends BaseApi {
         return param;
     }
 
-
     @Data
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Param {
@@ -60,5 +58,6 @@ public class SendPrivateMsg extends BaseApi {
 
         @JSONField(name = "auto_escape")
         private boolean autoEscape;
+
     }
 }

@@ -1,27 +1,25 @@
 package com.wuxianggujun.tinasproutcore.message;
 
-import com.wuxianggujun.tinasproutcore.message.support.AtMessage;
-import com.wuxianggujun.tinasproutcore.message.support.TextMessage;
+import com.alibaba.fastjson.JSON;
+import com.wuxianggujun.tinasproutcore.message.support.*;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-09 14:05
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class MessageChain extends ArrayList<Message> {
 
     @Override
     public String toString() {
-        return this.stream().map(Objects::toString).collect(Collectors.joining());
+        return this.stream().map(Object::toString).collect(Collectors.joining());
     }
 
     public String toMessageString() {
-        return this.stream().map(Message::toMessageString).collect(Collectors.joining());
+        return this.stream().map(Message::toMessageString).collect(Collectors.joining(",", "[", "]"));
     }
-
 
     public MessageChain at(long qq) {
         this.add(new AtMessage(String.valueOf(qq)));
@@ -38,5 +36,29 @@ public class MessageChain extends ArrayList<Message> {
         return this;
     }
 
+    public MessageChain image(String file) {
+        this.add(new ImageMessage(file));
+        return this;
+    }
+
+    public MessageChain reply(int messageId) {
+        this.add(new ReplyMessage(messageId));
+        return this;
+    }
+
+    public MessageChain record(String file) {
+        this.add(new RecordMessage(file));
+        return this;
+    }
+    public MessageChain face(String id) {
+        this.add(new FaceMessage(id));
+        return this;
+    }
+
+    public MessageChain copy() {
+        MessageChain messageChain = new MessageChain();
+        messageChain.addAll(this.stream().map(message -> MessageTypeHandle.getMessage(JSON.parseObject(message.toMessageString()))).collect(Collectors.toList()));
+        return messageChain;
+    }
 
 }

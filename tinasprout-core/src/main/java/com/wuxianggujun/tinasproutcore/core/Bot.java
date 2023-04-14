@@ -20,9 +20,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-03-06 20:52
- **/
+ * @author xiaoxu
+ * @since 2021/5/27 10:36
+ */
 @Slf4j
 public class Bot {
 

@@ -9,9 +9,9 @@ import com.wuxianggujun.tinasproutcore.injector.ObjectInjector;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-13 17:44
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Slf4j
 public class MemberInjector implements ObjectInjector<Member> {
     @Override
@@ -27,11 +27,11 @@ public class MemberInjector implements ObjectInjector<Member> {
     @Override
     public Member getObject(BaseEvent event, Bot bot) {
         try {
-            if (event instanceof GroupMessageEvent groupMessageEvent) {
-                return bot.getMember(groupMessageEvent.getGroupId(), groupMessageEvent.getUserId());
+            if (event instanceof GroupMessageEvent) {
+                return bot.getMember(((GroupMessageEvent) event).getGroupId(), ((GroupMessageEvent) event).getUserId());
             }
-            if (event instanceof MemberAddEvent memberAddEvent) {
-                return bot.getMember(memberAddEvent.getGroupId(), memberAddEvent.getUserId());
+            if (event instanceof MemberAddEvent) {
+                return bot.getMember(((MemberAddEvent) event).getGroupId(), ((MemberAddEvent) event).getUserId());
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);

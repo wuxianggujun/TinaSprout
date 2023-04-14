@@ -3,9 +3,9 @@ package com.wuxianggujun.tinasproutcore.injector.object;
 import lombok.Data;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-12 16:56
- **/
+ * @author xiaoxu
+ * @since 2021/8/9 5:10 下午
+ */
 @Data
 public class RecallMessage {
 

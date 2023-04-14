@@ -3,9 +3,9 @@ package com.wuxianggujun.tinasproutcore.api.support;
 import com.wuxianggujun.tinasproutcore.api.BaseApi;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-10 19:22
- **/
+ * @author xiaoxu
+ * @since 2022/5/19 17:03
+ */
 public class GetLoginInfo extends BaseApi {
 
     @Override

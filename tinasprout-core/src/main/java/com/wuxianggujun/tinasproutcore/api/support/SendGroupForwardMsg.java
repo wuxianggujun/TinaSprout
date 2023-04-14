@@ -13,22 +13,27 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-09 22:25
- **/
+ * @author jiluo
+ * @since 2021-09-08
+ */
 public class SendGroupForwardMsg extends BaseApi {
 
-    private final SendGroupForwardMsg.Param param;
+    private final Param param;
 
     public SendGroupForwardMsg(long groupId, List<ForwardNodeMessage> messageList) {
-        this.param = new SendGroupForwardMsg.Param();
+        this.param = new Param();
         this.param.setGroupId(groupId);
         JSONArray messages = new JSONArray();
-        messageList.forEach(v -> {
+        messageList.forEach(v->{
             JSONObject message = JSON.parseObject(v.toMessageString());
             messages.add(message);
         });
-        this.param.setMessage(messages);
+        this.param.setMessages(messages);
+    }
+
+    @Override
+    public boolean needSleep() {
+        return true;
     }
 
     @Override
@@ -41,12 +46,6 @@ public class SendGroupForwardMsg extends BaseApi {
         return param;
     }
 
-    @Override
-    public boolean needSleep() {
-        return true;
-    }
-
-
     @Data
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Param {
@@ -55,6 +54,7 @@ public class SendGroupForwardMsg extends BaseApi {
         private long groupId;
 
         @JSONField(name = "messages")
-        private JSONArray message;
+        private JSONArray messages;
+
     }
 }

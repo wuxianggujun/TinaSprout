@@ -7,9 +7,9 @@ import com.wuxianggujun.tinasproutcore.event.message.PrivateMessageEvent;
 import com.wuxianggujun.tinasproutcore.injector.ObjectInjector;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-13 17:54
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 public class FriendInjector implements ObjectInjector<Friend> {
     @Override
     public Class<Friend> getClassType() {
@@ -23,7 +23,8 @@ public class FriendInjector implements ObjectInjector<Friend> {
 
     @Override
     public Friend getObject(BaseEvent event, Bot bot) {
-        if (event instanceof PrivateMessageEvent privateMessageEvent) {
+        if (event instanceof PrivateMessageEvent) {
+            PrivateMessageEvent privateMessageEvent = (PrivateMessageEvent) event;
             return bot.getFriend(privateMessageEvent.getUserId());
         }
         return null;

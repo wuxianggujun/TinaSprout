@@ -5,9 +5,9 @@ import lombok.Data;
 import java.lang.reflect.Method;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-10 19:56
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Data
 public class HandlerMethod {
 
@@ -16,4 +16,5 @@ public class HandlerMethod {
     private Object object;
 
     private Method method;
+
 }

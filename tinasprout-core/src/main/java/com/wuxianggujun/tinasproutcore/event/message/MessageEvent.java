@@ -7,14 +7,14 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * @author WuXiangGuJun
- * @create 2023-04-12 16:21
- **/
+ * @author xiaoxu
+ * @since 2022-05-24 10:19
+ */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class MessageEvent extends BaseEvent {
-    
+
     @JSONField(name = "message_id")
     private Integer messageId;
 
