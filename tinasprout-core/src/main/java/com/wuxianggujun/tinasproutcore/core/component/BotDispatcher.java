@@ -24,12 +24,14 @@ import java.util.concurrent.Executors;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class BotDispatcher {
 
+    //通过SpringBoot的Autowired注入继承所有继承EventHandler的子类
     private final Map<String, EventHandler> eventHandlerMap;
 
     private ExecutorService executorService;
 
     @PostConstruct
     public void init() {
+        //创建线程池
         this.executorService = Executors.newFixedThreadPool(4);
     }
 

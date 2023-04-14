@@ -28,14 +28,14 @@ public class GroupInjector implements ObjectInjector<Group> {
     @Override
     public Group getObject(BaseEvent event, Bot bot) {
         try {
-            if (event instanceof GroupMessageEvent) {
-                return bot.getGroup(((GroupMessageEvent) event).getGroupId());
+            if (event instanceof GroupMessageEvent groupMessageEvent) {
+                return bot.getGroup(groupMessageEvent.getGroupId());
             }
-            if (event instanceof GroupRecallEvent) {
-                return bot.getGroup(((GroupRecallEvent) event).getGroupId());
+            if (event instanceof GroupRecallEvent groupRecallEvent) {
+                return bot.getGroup(groupRecallEvent.getGroupId());
             }
-            if (event instanceof MemberAddEvent) {
-                return bot.getGroup(((MemberAddEvent) event).getGroupId());
+            if (event instanceof MemberAddEvent memberAddEvent) {
+                return bot.getGroup(memberAddEvent.getGroupId());
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);

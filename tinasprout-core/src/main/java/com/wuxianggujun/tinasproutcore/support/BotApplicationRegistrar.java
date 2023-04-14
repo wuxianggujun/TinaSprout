@@ -27,6 +27,7 @@ import org.springframework.core.type.AnnotationMetadata;
 /**
  * ImportSelector接口是spring中导入外部配置的核心接口，在SpringBoot的自动化配置和@EnableXXX(功能性注解)都有它的存在。
  */
+//实现了Spring框架的ImportSelector接口的类，它的作用是在运行时动态加载指定的类。
 public class BotApplicationRegistrar implements ImportSelector {
 
     @Override
@@ -38,6 +39,7 @@ public class BotApplicationRegistrar implements ImportSelector {
                 HeartbeatEventHandler.class.getName(),
                 PrivateMessageEventHandler.class.getName(),
                 GroupMessageEventHandler.class.getName(),
+                //CommandEventHandler.class.getName(),//添加处理命令的even handler
                 GroupRecallEventHandler.class.getName(),
                 MemberAddEventHandler.class.getName(),
                 RecallMessageInjector.class.getName(),

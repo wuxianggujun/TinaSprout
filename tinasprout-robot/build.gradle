@@ -1,5 +1,5 @@
 springBoot {
-    mainClass = 'com.wuxianggujun.tinasproutrobot.TinasproutRobotApplication'
+    mainClass = 'com.wuxianggujun.tinasproutrobot.TinaSproutRobotApplication'
 }
 
 bootJar {

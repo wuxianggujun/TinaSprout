@@ -10,5 +10,5 @@ import com.wuxianggujun.tinasproutcore.core.Bot;
 public interface EventHandler {
 
     void handle(JSONObject jsonObject, Bot bot);
-
+    
 }

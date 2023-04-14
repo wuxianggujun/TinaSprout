@@ -13,6 +13,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+//@Import 主要提供导人配置类的功能
 @Import({BotApplicationRegistrar.class, BotAutoConfigRegistrar.class})
 public @interface EnableBot {
 }
