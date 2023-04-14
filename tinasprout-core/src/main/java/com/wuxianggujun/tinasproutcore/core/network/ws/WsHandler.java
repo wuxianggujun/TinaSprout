@@ -54,6 +54,7 @@ public class WsHandler extends SimpleChannelInboundHandler<Object> {
 
         this.webSocketClientHandshaker = WebSocketClientHandshakerFactory
                 .newHandshaker(new URI(this.botConfig.getUrl()), WebSocketVersion.V13, null, false, httpHeaders, 1024 * 1024 * 100);
+        ;
         this.webSocketClientHandshaker.handshake(ctx.channel());
     }
 

@@ -7,6 +7,7 @@ import com.wuxianggujun.tinasproutcore.api.BaseApi;
  * @create 2023-04-10 19:22
  **/
 public class GetLoginInfo extends BaseApi {
+
     @Override
     public String getAction() {
         return "get_login_info";
@@ -16,4 +17,5 @@ public class GetLoginInfo extends BaseApi {
     public Object getParams() {
         return null;
     }
+
 }

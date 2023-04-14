@@ -22,7 +22,6 @@ import java.util.concurrent.locks.ReentrantLock;
 @Slf4j
 public class WsBotClient implements BotClient {
 
-
     private final Lock lock = new ReentrantLock();
     private static final Map<String, CompletableFuture<ApiResult>> completableFutureMap = new ConcurrentHashMap<>();
     private final Channel channel;
@@ -60,8 +59,8 @@ public class WsBotClient implements BotClient {
             } else {
                 channel.writeAndFlush(new TextWebSocketFrame(baseApi.buildJson()));
             }
-            CompletableFuture<ApiResult> completeFuture = new CompletableFuture<>();
-            completableFutureMap.put(baseApi.getEcho(), completeFuture);
+            CompletableFuture<ApiResult> completableFuture = new CompletableFuture<>();
+            completableFutureMap.put(baseApi.getEcho(), completableFuture);
             ApiResult apiResult = getApiResult(baseApi.getEcho());
             lastInvokeTime = System.currentTimeMillis();
             if (apiResult == null || !"ok".equals(apiResult.getStatus())) {
@@ -73,14 +72,13 @@ public class WsBotClient implements BotClient {
         }
     }
 
-
     private ApiResult getApiResult(String echo) {
-        CompletableFuture<ApiResult> completeFuture = completableFutureMap.get(echo);
-        if (completeFuture == null) {
+        CompletableFuture<ApiResult> completableFuture = completableFutureMap.get(echo);
+        if (completableFuture == null) {
             return null;
         }
         try {
-            ApiResult apiResult = completeFuture.get(1, TimeUnit.MINUTES);
+            ApiResult apiResult = completableFuture.get(1, TimeUnit.MINUTES);
             completableFutureMap.remove(echo);
             return apiResult;
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
@@ -88,4 +86,5 @@ public class WsBotClient implements BotClient {
             return null;
         }
     }
+
 }

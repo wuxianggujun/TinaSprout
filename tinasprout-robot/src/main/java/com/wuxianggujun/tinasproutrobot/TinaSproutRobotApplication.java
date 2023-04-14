@@ -1,13 +1,15 @@
 package com.wuxianggujun.tinasproutrobot;
 
+import com.wuxianggujun.tinasproutcore.EnableBot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@EnableBot
 @SpringBootApplication
-public class TinasproutRobotApplication {
+public class TinaSproutRobotApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TinasproutRobotApplication.class, args);
+		SpringApplication.run(TinaSproutRobotApplication.class, args);
 	}
 
 }

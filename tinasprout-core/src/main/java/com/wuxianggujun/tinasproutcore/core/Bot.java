@@ -27,17 +27,11 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Bot {
 
     private final Map<Long, Friend> friends = new ConcurrentHashMap<>();
-
     private final Map<Long, Group> groups = new ConcurrentHashMap<>();
-
     private final Map<Long, Map<Long, Member>> groupMembers = new ConcurrentHashMap<>();
-
     private final Map<String, Map<Integer, CacheMessage>> cacheMessageChain = new HashMap<>();
-
     private final Lock cacheMessageChainLock = new ReentrantLock();
-
     private final CompletableFuture<Long> completableFuture = new CompletableFuture<>();
-
     private final BotConfig botConfig;
     private final BotClient botClient;
 
@@ -62,15 +56,16 @@ public class Bot {
     }
 
     public CompletableFuture<Long> getCompletableFuture() {
-        return this.completableFuture;
+        return completableFuture;
     }
 
     public void pushGroupCacheMessageChain(Long groupId, Integer messageId, CacheMessage cacheMessage) {
         this.pushCacheMessageChain("group", groupId, messageId, cacheMessage);
+
     }
 
-    public void pushUserCacheMessageChain(Long groupId, Integer messageId, CacheMessage cacheMessage) {
-        this.pushCacheMessageChain("user", groupId, messageId, cacheMessage);
+    public void pushUserCacheMessageChain(Long userId, Integer messageId, CacheMessage cacheMessage) {
+        this.pushCacheMessageChain("user", userId, messageId, cacheMessage);
     }
 
     private void pushCacheMessageChain(String prefix, Long id, Integer messageId, CacheMessage cacheMessage) {
@@ -91,29 +86,27 @@ public class Bot {
         return this.getCacheMessageChain("user", groupId, messageId, size);
     }
 
-    private List<CacheMessage> getCacheMessageChain(String prefix, Long id, Integer messageId, Integer size) {
-        //获取锁保证线程安全
+    private List<CacheMessage> getCacheMessageChain(String prefix, long id, Integer messageId, Integer size) {
         this.cacheMessageChainLock.lock();
         try {
-            //初始化返回结果集合
             List<CacheMessage> result = new ArrayList<>();
-            // 获取指定消息链的所有消息
             Map<Integer, CacheMessage> messageChainMap = this.cacheMessageChain.get(prefix + id);
-            if (messageChainMap == null || messageChainMap.isEmpty()) {
+            if (messageChainMap == null) {
                 return result;
             }
-
+            if (messageChainMap.isEmpty()) {
+                return result;
+            }
             List<Integer> messageIds = new ArrayList<>(messageChainMap.keySet());
-            boolean find = false;// 标记是否已经找到指定的消息
-
+            boolean find = false;
             for (int i = messageIds.size() - 1; i >= 0; i--) {
                 Integer messageIdTemp = messageIds.get(i);
                 if (!find) {
                     if (messageId.equals(messageIdTemp)) {
                         find = true;
                     }
-                } else {
-                    //如果已经找到指定的消息
+                }
+                if (find) {
                     result.add(messageChainMap.get(messageIdTemp));
                     if (result.size() >= size) {
                         break;
@@ -123,18 +116,16 @@ public class Bot {
             Collections.reverse(result);
             return result;
         } finally {
-            //释放锁
             this.cacheMessageChainLock.unlock();
         }
     }
 
     private JSONObject getObject(Object object) {
         if (!(object instanceof JSONObject)) {
-            throw new BotException(String.format("[%s]调用api失败: 解析结果出错。", this.botName));
+            throw new BotException(String.format("[%s]调用api失败：解析结果出错。", this.botName));
         }
         return (JSONObject) object;
     }
-
 
     private JSONArray getArray(Object object) {
         if (!(object instanceof JSONArray)) {
@@ -171,7 +162,6 @@ public class Bot {
         return this.groups.values();
     }
 
-
     public void flushGroupMembers(Group group) {
         ApiResult apiResult = this.botClient.invokeApi(new GetGroupMembers(group.getGroupId()), this);
         JSONArray resultArray = this.getArray(apiResult.getData());
@@ -182,7 +172,7 @@ public class Bot {
             String nickname = resultObject.getString("nickname");
             String card = resultObject.getString("card");
             String sex = resultObject.getString("sex");
-            int age = resultObject.getInteger("age");
+            int age = resultObject.getIntValue("age");
             String area = resultObject.getString("area");
             Date joinTime = resultObject.getDate("join_time");
             Date lastSentTime = resultObject.getDate("last_sent_time");
@@ -197,7 +187,8 @@ public class Bot {
         log.debug(String.format("[%s]刷新群%s的成员列表完成,共有群成员%d个", this.botName, group.getGroupName(), members.size()));
     }
 
-    public boolean isFriend(long userId) throws ExecutionException, InterruptedException {
+
+    public boolean isFriend(long userId) throws InterruptedException, ExecutionException {
         if (!this.completableFuture.isDone()) {
             this.completableFuture.get();
         }
@@ -219,7 +210,6 @@ public class Bot {
                     String nickname = resultObject.getString("nickname");
                     String remark = resultObject.getString("remark");
                     this.friends.put(userIdTemp, new Friend(userIdTemp, nickname, remark, this));
-
                 }
                 friend = this.friends.get(userId);
             }
@@ -228,7 +218,6 @@ public class Bot {
             return null;
         }
     }
-
 
     public Collection<Friend> getFriends() {
         try {
@@ -246,7 +235,6 @@ public class Bot {
             if (!this.completableFuture.isDone()) {
                 this.completableFuture.get();
             }
-
             Group group = this.groups.get(groupId);
             if (group == null) {
                 ApiResult apiResult = this.botClient.invokeApi(new GetGroup(groupId), this);
@@ -254,6 +242,7 @@ public class Bot {
                 String groupName = resultObject.getString("group_name");
                 group = new Group(groupId, groupName, this);
                 this.groups.put(groupId, group);
+                return group;
             }
             return group;
         } catch (Exception e) {
@@ -308,7 +297,6 @@ public class Bot {
         }
     }
 
-
     public Collection<Member> getMembers(long groupId) {
         try {
             if (!this.completableFuture.isDone()) {
@@ -328,7 +316,6 @@ public class Bot {
     public int sendGroupMessage(long groupId, MessageChain messageChain) {
         ApiResult apiResult = this.botClient.invokeApi(new SendGroupMsg(groupId, messageChain), this);
         return this.getObject(apiResult.getData()).getIntValue("message_id");
-
     }
 
     public int sendGroupForwardMessage(long groupId, List<ForwardNodeMessage> messageList) {
@@ -341,10 +328,8 @@ public class Bot {
         return this.getObject(apiResult.getData()).getIntValue("message_id");
     }
 
-
     public void groupBan(long groupId) {
         this.botClient.invokeApi(new GroupBan(groupId, true), this);
-
     }
 
     public void groupPardon(long groupId) {
@@ -358,7 +343,6 @@ public class Bot {
     public void memberPardon(long groupId, long userId) {
         this.botClient.invokeApi(new Ban(groupId, userId, 0), this);
     }
-
 
     public int sendPrivateMessage(long userId, MessageChain messageChain) {
         ApiResult apiResult = this.botClient.invokeApi(new SendPrivateMsg(userId, messageChain), this);
@@ -376,7 +360,6 @@ public class Bot {
     public void setGroupSpecialTitle(long userId, String specialTitle, Number duration, long groupId) {
         this.botClient.invokeApi(new SetGroupSpecialTitle(userId, specialTitle, duration, groupId), this);
     }
-
 
     public void flushBotInfo() {
         ApiResult apiResult = this.botClient.invokeApi(new GetLoginInfo(), this);
