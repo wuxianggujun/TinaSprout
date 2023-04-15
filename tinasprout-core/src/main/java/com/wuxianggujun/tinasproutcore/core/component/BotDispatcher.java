@@ -3,6 +3,8 @@ package com.wuxianggujun.tinasproutcore.core.component;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wuxianggujun.tinasproutcore.api.ApiResult;
+import com.wuxianggujun.tinasproutcore.command.decorator.DefaultEventDecorator;
+import com.wuxianggujun.tinasproutcore.command.decorator.EventDecorator;
 import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.core.network.ws.WsBotClient;
 import com.wuxianggujun.tinasproutcore.handler.EventHandler;
@@ -55,7 +57,8 @@ public class BotDispatcher {
             this.executorService.submit(() -> {
                 try {
                     for (EventHandler eventHandler : eventHandlerMap.values()) {
-                        eventHandler.handle(jsonObject, bot);
+                        EventDecorator eventDecorator = new DefaultEventDecorator(eventHandler);
+                        eventDecorator.handle(jsonObject, bot);
                     }
                 } catch (Exception e) {
                     log.error(e.getMessage(), e);

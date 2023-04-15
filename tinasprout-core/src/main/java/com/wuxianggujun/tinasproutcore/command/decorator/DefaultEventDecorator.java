@@ -1,19 +1,16 @@
-package com.wuxianggujun.tinasproutcore.command.interceptor;
+package com.wuxianggujun.tinasproutcore.command.decorator;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.handler.EventHandler;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author WuXiangGuJun
- * @create 2023-04-15 9:46
+ * @create 2023-04-15 19:38
  **/
-@Slf4j
-public class MessageHandlerDecorator extends HandlerDecorator {
-
-    public MessageHandlerDecorator(EventHandler handler) {
-        super(handler);
+public class DefaultEventDecorator  extends EventDecorator{
+    public DefaultEventDecorator(EventHandler eventHandler) {
+        super(eventHandler);
     }
 
     @Override
