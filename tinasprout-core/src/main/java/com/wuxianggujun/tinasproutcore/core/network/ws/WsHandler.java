@@ -122,8 +122,10 @@ public class WsHandler extends SimpleChannelInboundHandler<Object> {
             }
             return;
         }
-        if (msg instanceof WebSocketFrame frame) {
-            if (frame instanceof TextWebSocketFrame textFrame) {
+        if (msg instanceof WebSocketFrame) {
+            WebSocketFrame frame = (WebSocketFrame) msg;
+            if (frame instanceof TextWebSocketFrame) {
+                TextWebSocketFrame textFrame = (TextWebSocketFrame) frame;
                 this.botDispatcher.handle(textFrame.text());
             } else if (frame instanceof CloseWebSocketFrame) {
                 ch.close();
@@ -133,7 +135,8 @@ public class WsHandler extends SimpleChannelInboundHandler<Object> {
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        if (evt instanceof IdleStateEvent idleStateEvent) {
+        if (evt instanceof IdleStateEvent) {
+            IdleStateEvent idleStateEvent = (IdleStateEvent) evt;
             if (idleStateEvent.state() == IdleState.WRITER_IDLE) {
                 ctx.writeAndFlush(new PingWebSocketFrame());
             }

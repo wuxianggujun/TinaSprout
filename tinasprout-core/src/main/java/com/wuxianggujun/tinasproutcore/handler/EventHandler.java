@@ -9,13 +9,6 @@ import com.wuxianggujun.tinasproutcore.core.Bot;
  */
 public interface EventHandler {
 
-    /**
-     * 预处理Handle 只有返回true才处理handle的方法
-     *
-     * @return true
-     */
-
     void handle(JSONObject jsonObject, Bot bot);
-    
 
 }

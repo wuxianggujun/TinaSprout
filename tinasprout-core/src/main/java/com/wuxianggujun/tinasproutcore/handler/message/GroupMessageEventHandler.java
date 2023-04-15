@@ -26,7 +26,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class GroupMessageEventHandler implements EventHandler {
-    
+
     @Override
     public void handle(JSONObject jsonObject, Bot bot) {
         if (!GroupMessageEvent.isSupport(jsonObject)) {
@@ -52,7 +52,7 @@ public class GroupMessageEventHandler implements EventHandler {
             }
             if (groupMessageHandler.ignoreItself().equals(IgnoreItselfEnum.IGNORE_ITSELF) && "message_sent".equals(groupMessageEvent.getPostType())) {
                 return false;
-            } else if (groupMessageHandler.ignoreItself().equals(IgnoreItselfEnum.ONLY_ITSELF) && !"message_sent".equals(groupMessageEvent.getPostType())) {
+            } else if (groupMessageHandler.ignoreItself().equals(IgnoreItselfEnum.ONLY_ITSELF) && !"message_sent".equals(groupMessageEvent.getPostType())){
                 return false;
             }
             if (groupMessageHandler.groupIds().length > 0 && !ArrayUtils.contain(groupMessageHandler.groupIds(), groupMessageEvent.getGroupId())) {
@@ -78,16 +78,13 @@ public class GroupMessageEventHandler implements EventHandler {
             }
             return "none".equals(groupMessageHandler.regex()) || messageChain.toString().matches(groupMessageHandler.regex());
         }, "message");
-        
-        
-        //占时不明白，这个游历resultList后又发送是什么意思
         for (Object result : resultList) {
             try {
-                if (result instanceof Message resultMessage) {
-                    bot.getGroup(groupMessageEvent.getGroupId()).sendMessage(resultMessage);
+                if (result instanceof Message) {
+                    bot.getGroup(groupMessageEvent.getGroupId()).sendMessage((Message) result);
                 }
-                if (result instanceof MessageChain resultMessageChain) {
-                    bot.getGroup(groupMessageEvent.getGroupId()).sendMessage(resultMessageChain);
+                if (result instanceof MessageChain) {
+                    bot.getGroup(groupMessageEvent.getGroupId()).sendMessage((MessageChain) result);
                 }
             } catch (Exception e) {
                 log.error(e.getMessage(), e);

@@ -1,6 +1,5 @@
 package com.wuxianggujun.tinasproutcore.injector;
 
-
 import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.event.BaseEvent;
 

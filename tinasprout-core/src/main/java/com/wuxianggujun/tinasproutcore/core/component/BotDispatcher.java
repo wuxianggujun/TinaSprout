@@ -3,8 +3,6 @@ package com.wuxianggujun.tinasproutcore.core.component;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wuxianggujun.tinasproutcore.api.ApiResult;
-import com.wuxianggujun.tinasproutcore.command.interceptor.HandlerDecorator;
-import com.wuxianggujun.tinasproutcore.command.interceptor.MessageHandlerDecorator;
 import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.core.network.ws.WsBotClient;
 import com.wuxianggujun.tinasproutcore.handler.EventHandler;
@@ -26,13 +24,12 @@ import java.util.concurrent.Executors;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class BotDispatcher {
 
-    //通过SpringBoot的Autowired注入继承所有继承EventHandler的子类
     private final Map<String, EventHandler> eventHandlerMap;
+
     private ExecutorService executorService;
 
     @PostConstruct
     public void init() {
-        //创建线程池
         this.executorService = Executors.newFixedThreadPool(4);
     }
 
@@ -58,10 +55,7 @@ public class BotDispatcher {
             this.executorService.submit(() -> {
                 try {
                     for (EventHandler eventHandler : eventHandlerMap.values()) {
-                        //装饰器模式
-                        HandlerDecorator handlerDecorator = new MessageHandlerDecorator(eventHandler);
-                        handlerDecorator.handle(jsonObject, bot);
-                        //eventHandler.handle(jsonObject, bot);
+                        eventHandler.handle(jsonObject, bot);
                     }
                 } catch (Exception e) {
                     log.error(e.getMessage(), e);

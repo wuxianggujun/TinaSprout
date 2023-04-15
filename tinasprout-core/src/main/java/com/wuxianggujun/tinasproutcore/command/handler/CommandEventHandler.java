@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author WuXiangGuJun
  * @create 2023-04-14 19:05
  **/
+
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class CommandEventHandler implements EventHandler {
