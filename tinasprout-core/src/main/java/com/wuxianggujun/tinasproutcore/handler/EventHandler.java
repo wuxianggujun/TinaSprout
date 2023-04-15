@@ -11,12 +11,11 @@ public interface EventHandler {
 
     /**
      * 预处理Handle 只有返回true才处理handle的方法
+     *
      * @return true
      */
-    default boolean preHandle(JSONObject jsonObject, Bot bot) {
-        return true;
-    }
 
     void handle(JSONObject jsonObject, Bot bot);
+    
 
 }
