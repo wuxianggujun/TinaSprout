@@ -3,16 +3,17 @@ package com.wuxianggujun.tinasproutcore.core.component;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wuxianggujun.tinasproutcore.api.ApiResult;
-import com.wuxianggujun.tinasproutcore.command.decorator.DefaultEventDecorator;
-import com.wuxianggujun.tinasproutcore.command.decorator.EventDecorator;
+import com.wuxianggujun.tinasproutcore.command.interceptor.EventInterceptor;
 import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.core.network.ws.WsBotClient;
 import com.wuxianggujun.tinasproutcore.handler.EventHandler;
+import com.wuxianggujun.tinasproutcore.handler.meta.HeartbeatEventHandler;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -29,6 +30,8 @@ public class BotDispatcher {
     private final Map<String, EventHandler> eventHandlerMap;
 
     private ExecutorService executorService;
+
+    private final List<EventInterceptor> interceptors;
 
     @PostConstruct
     public void init() {
@@ -57,8 +60,29 @@ public class BotDispatcher {
             this.executorService.submit(() -> {
                 try {
                     for (EventHandler eventHandler : eventHandlerMap.values()) {
-                        EventDecorator eventDecorator = new DefaultEventDecorator(eventHandler);
-                        eventDecorator.handle(jsonObject, bot);
+                        log.info("Bot EventHandler : " + eventHandler);
+                        //别问，问就是如果将心跳包加进去。tmd 判断事件太麻烦了
+                        if (eventHandler instanceof HeartbeatEventHandler) {
+                            eventHandler.handle(jsonObject, bot);
+                            continue;
+                        }
+
+                        boolean continueHandle = true;
+
+                        for (EventInterceptor interceptor : interceptors) {
+                            continueHandle = interceptor.preHandle(eventHandler, jsonObject, bot);
+                            if (!continueHandle) {
+                                break;
+                            }
+                        }
+
+                        if (continueHandle) {
+                            eventHandler.handle(jsonObject, bot);
+                            for (EventInterceptor interceptor : interceptors) {
+                                interceptor.postHandle(eventHandler, jsonObject, bot);
+                            }
+                        }
+
                     }
                 } catch (Exception e) {
                     log.error(e.getMessage(), e);

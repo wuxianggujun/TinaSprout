@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class MessageTest {
-    @GroupMessageHandler(regex = "none")
+    @GroupMessageHandler(regex = "none", groupIds = {864358403})
     public void test(Group group, Member member, MessageChain messageChain, String message, Integer id) {
         group.sendMessage(messageChain);
         System.out.println(group.getGroupName() + " | " + member.getNickname());

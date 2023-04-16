@@ -8,6 +8,5 @@ jar {
 }
 
 dependencies {
-    implementation "com.alibaba:fastjson:1.2.83"
     implementation 'io.netty:netty-all:4.1.86.Final'
 }

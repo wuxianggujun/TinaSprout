@@ -8,7 +8,8 @@ import com.wuxianggujun.tinasproutcore.handler.EventHandler;
  * @author WuXiangGuJun
  * @create 2023-04-15 19:38
  **/
-public class DefaultEventDecorator  extends EventDecorator{
+public class DefaultEventDecorator extends EventDecorator {
+
     public DefaultEventDecorator(EventHandler eventHandler) {
         super(eventHandler);
     }
