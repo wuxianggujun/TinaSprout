@@ -23,4 +23,9 @@ public interface EventInterceptor {
 
     void postHandle(EventHandler eventHandler, JSONObject jsonObject, Bot bot);
 
+
+    default int getPriority() {
+        return 5;
+    }
+
 }

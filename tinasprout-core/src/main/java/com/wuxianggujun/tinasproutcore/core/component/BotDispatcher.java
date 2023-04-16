@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -36,6 +37,8 @@ public class BotDispatcher {
     @PostConstruct
     public void init() {
         this.executorService = Executors.newFixedThreadPool(4);
+        //通过对拦截器排序 越小的越靠前 默认为 5 我自己的定义为1,0是给用户替换框架内定义的拦截器
+        interceptors.sort(Comparator.comparingInt(EventInterceptor::getPriority));
     }
 
     public void handle(String message) {
