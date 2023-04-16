@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.wuxianggujun.tinasproutcore.command.interceptor.EventInterceptor;
 import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.handler.EventHandler;
+import com.wuxianggujun.tinasproutcore.handler.message.PrivateMessageEventHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +17,12 @@ import org.springframework.stereotype.Component;
 public class TestEventInterceptor implements EventInterceptor {
     @Override
     public boolean preHandle(EventHandler eventHandler, JSONObject jsonObject, Bot bot) {
-        log.info("EventHandler : "+eventHandler);
-        return true;
+        log.info("EventHandler : " + eventHandler);
+        if (eventHandler instanceof PrivateMessageEventHandler){
+            log.info(jsonObject.toString());
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -60,7 +60,6 @@ public class BotDispatcher {
             this.executorService.submit(() -> {
                 try {
                     for (EventHandler eventHandler : eventHandlerMap.values()) {
-                        log.info("Bot EventHandler : " + eventHandler);
                         //别问，问就是如果将心跳包加进去。tmd 判断事件太麻烦了
                         if (eventHandler instanceof HeartbeatEventHandler) {
                             eventHandler.handle(jsonObject, bot);
