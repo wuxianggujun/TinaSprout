@@ -20,6 +20,12 @@ public class AddFriendEventHandler implements EventHandler {
         if (!AddFriendEvent.isSupport(jsonObject)) {
             return;
         }
-        log.info("添加好友事件: " + jsonObject.toString());
+        AddFriendEvent addFriendEvent = jsonObject.toJavaObject(AddFriendEvent.class);
+        log.info("添加好友事件: " + jsonObject.toString() + "\n" + addFriendEvent.toString());
+
+     /*   List<Object> resultList = BotFactory.handleMethod(bot,addFriendEvent,handlerMethod -> {
+            
+        },"");
+        */
     }
 }
