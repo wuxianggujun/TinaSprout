@@ -11,9 +11,9 @@ public class FriendMessage {
     private String remark;
 
     public String toString() {
-        return "{" + "Flag:" + flag +
-                "approve:" + approve +
-                "remark" + remark + "}";
+        return "{" + "Flag:" + flag +"    "+
+                "approve:" + approve +"    "+
+                "remark:" + remark + "}";
     }
 
 }

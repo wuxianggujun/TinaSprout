@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tinasprout-robot/TinaSprout.tinasprout-robot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/tinasprout-robot/TinaSprout.tinasprout-robot.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tinasprout-core/com.wuxianggujun.TinaSprout.tinasprout-core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/tinasprout-core/com.wuxianggujun.TinaSprout.tinasprout-core.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tinasprout-robot/com.wuxianggujun.TinaSprout.tinasprout-robot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/tinasprout-robot/com.wuxianggujun.TinaSprout.tinasprout-robot.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tinasprout-core/tinasprout-core.TinaSprout.tinasprout-core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/tinasprout-core/tinasprout-core.TinaSprout.tinasprout-core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tinasprout-robot/tinasprout-robot.TinaSprout.tinasprout-robot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/tinasprout-robot/tinasprout-robot.TinaSprout.tinasprout-robot.main.iml" />
     </modules>
   </component>
 </project>

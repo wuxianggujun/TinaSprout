@@ -78,6 +78,8 @@ public class GroupMessageEventHandler implements EventHandler {
             }
             return "none".equals(groupMessageHandler.regex()) || messageChain.toString().matches(groupMessageHandler.regex());
         }, "message");
+
+
         for (Object result : resultList) {
             try {
                 if (result instanceof Message) {

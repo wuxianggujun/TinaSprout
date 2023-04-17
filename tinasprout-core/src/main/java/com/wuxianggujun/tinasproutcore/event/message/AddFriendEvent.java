@@ -2,22 +2,22 @@ package com.wuxianggujun.tinasproutcore.event.message;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
-<<<<<<< HEAD
-=======
-import com.wuxianggujun.tinasproutcore.event.BaseEvent;
->>>>>>> 远程/dev
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
-<<<<<<< HEAD
+
 @Data
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class AddFriendEvent extends MessageEvent {
 
     @JSONField(name = "flag")
     private String frag;
+
+    @JSONField(name = "approve")
+    private boolean approve;
+
+    @JSONField(name = "remark")
+    private String remark;
 
     @JSONField(name = "comment")
     private String message;
@@ -26,32 +26,15 @@ public class AddFriendEvent extends MessageEvent {
     public static boolean isSupport(JSONObject jsonObject) {
 
         return (("request").equals(jsonObject.getString("post_type"))
-                &&"friend".equals(jsonObject.getString("request_type")));
-=======
-/**
- * @author WuXiangGuJun
- * @create 2023-04-17 14:14
- **/
-@Data
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-public class AddFriendEvent extends BaseEvent {
+                && "friend".equals(jsonObject.getString("request_type")));
 
-    @JSONField(name = "flag")
-    private String flag;
 
-    @JSONField(name = "request_type")
-    private String request_type;
-
-    @JSONField(name = "user_id")
-    private Long userId;
-
-    @JSONField(name = "comment")
-    private String comment;
-
-    public static boolean isSupport(JSONObject jsonObject) {
-        return ("friend".equals(jsonObject.getString("request_type")) && "request".equals(jsonObject.getString("post_type")));
->>>>>>> 远程/dev
     }
 
+    public String toString() {
+        return "{" + "Frag:" + frag +
+                "Approve:" +  approve +
+                "Comment:" + message +
+                "Remark:" + remark + "}";
+    }
 }

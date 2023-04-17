@@ -11,6 +11,15 @@
         <module name="com.wuxianggujun.TinaSprout.tinasprout-robot.main" />
         <module name="com.wuxianggujun.TinaSprout.tinasprout-core.main" />
       </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-processor/3.0.4/120cb2d8ed8f5f006bcc97813a920f25bd1a76da/spring-boot-configuration-processor-3.0.4.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.26/8f8cf0372abf564913e9796623aac4c8ea44025a/lombok-1.18.26.jar" />
+        </processorPath>
+        <module name="tinasprout-robot.TinaSprout.tinasprout-robot.main" />
+        <module name="tinasprout-core.TinaSprout.tinasprout-core.main" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="17" />
   </component>

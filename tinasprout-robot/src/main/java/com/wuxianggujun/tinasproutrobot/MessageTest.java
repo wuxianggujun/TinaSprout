@@ -4,10 +4,11 @@ import com.wuxianggujun.tinasproutcore.annotation.AddFriendHandler;
 import com.wuxianggujun.tinasproutcore.annotation.FriendMessageHandler;
 import com.wuxianggujun.tinasproutcore.annotation.GroupMessageHandler;
 import com.wuxianggujun.tinasproutcore.command.CommandParams;
-import com.wuxianggujun.tinasproutcore.command.annotion.CommandHandler;
+import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.core.Friend;
 import com.wuxianggujun.tinasproutcore.core.Group;
 import com.wuxianggujun.tinasproutcore.core.Member;
+import com.wuxianggujun.tinasproutcore.message.FriendMessage;
 import com.wuxianggujun.tinasproutcore.message.MessageChain;
 import com.wuxianggujun.tinasproutcore.message.support.TextMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -22,21 +23,15 @@ import org.springframework.stereotype.Component;
 public class MessageTest {
     @GroupMessageHandler(groupIds = {864358403})
     public void test(Group group, Member member, MessageChain messageChain, String message, Integer id) {
-        group.sendMessage(messageChain);
+        //group.sendMessage(messageChain);
     }
 
 
-    @CommandHandler(command = "add")
-    @FriendMessageHandler()
-    public void Command(Friend friend, MessageChain messageChain, CommandParams commandParams) {
-        MessageChain message = new MessageChain();
-        message.add(new TextMessage(messageChain.toMessageString()));
-        message.add(new TextMessage(commandParams.getName()));
-        friend.sendMessage(message);
-    }
 
-    @AddFriendHandler()
-    public void FromFriendRequest() {
+    @AddFriendHandler(approve = true,remark = "robot")
+    public void FromFriendRequest(Bot bot ,FriendMessage message) {
         log.info("请求添加好友");
+        System.out.println(message.toString());
+        //bot.addFriend(message);
     }
 }

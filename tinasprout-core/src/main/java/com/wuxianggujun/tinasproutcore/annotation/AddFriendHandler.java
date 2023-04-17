@@ -10,5 +10,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface AddFriendHandler {
-    
+    String remark() default "robot";
+    boolean approve() default false;
+    String flag() default "123456789";
 }
