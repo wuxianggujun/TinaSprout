@@ -1,6 +1,7 @@
 package com.wuxianggujun.tinasproutcore.core.component;
 
 import com.wuxianggujun.tinasproutcore.annotation.*;
+import com.wuxianggujun.tinasproutcore.command.annotion.CommandHandler;
 import com.wuxianggujun.tinasproutcore.config.BotConfig;
 import com.wuxianggujun.tinasproutcore.config.PropertySourcesUtils;
 import com.wuxianggujun.tinasproutcore.core.Bot;
@@ -68,6 +69,7 @@ public class BotFactory implements ApplicationContextAware, DisposableBean {
                             || method.isAnnotationPresent(FriendMessageHandler.class)
                             || method.isAnnotationPresent(GroupRecallHandler.class)
                             || method.isAnnotationPresent(MemberAddHandler.class)
+                            || method.isAnnotationPresent(CommandHandler.class)
             ).collect(Collectors.toSet());
             methodSet.forEach(method -> {
                 HandlerMethod handlerMethod = new HandlerMethod() {
@@ -138,6 +140,13 @@ public class BotFactory implements ApplicationContextAware, DisposableBean {
         return bots;
     }
 
+
+    /**
+     * 获取被注解标注的方法
+     *
+     * @param predicate 用于筛选出符合要求的HandlerMethod
+     * @return Set<HandlerMethod>
+     */
     public static Set<HandlerMethod> getHandlerMethodListByAnnotation(Predicate<? super HandlerMethod> predicate) {
         if (handlerMethodList.isEmpty()) {
             return new HashSet<>();
@@ -145,14 +154,18 @@ public class BotFactory implements ApplicationContextAware, DisposableBean {
         return handlerMethodList.stream().filter(predicate).collect(Collectors.toSet());
     }
 
+
     public static List<Object> handleMethod(Bot bot, BaseEvent event, Predicate<? super HandlerMethod> predicate, String objectInjectorType) {
         List<Object> resultList = new ArrayList<>();
         Set<HandlerMethod> handlerMethodSet = getHandlerMethodListByAnnotation(predicate);
         for (HandlerMethod handlerMethod : handlerMethodSet) {
+            //返回一个Class对象数组，这些对象按声明顺序表示此对象表示的可执行文件的形式参数类型。如果底层可执行文件不带参数，则返回长度为 0 的数组
             Class<?>[] parameterTypes = handlerMethod.getMethod().getParameterTypes();
             Object[] objects = new Object[parameterTypes.length];
             for (int i = 0; i < parameterTypes.length; i++) {
+                //获取当前参数的类型
                 Class<?> parameterType = parameterTypes[i];
+                // 从对象注入器映射中获取指定类型的对象注入器
                 ObjectInjector<?> objectInjector = objectInjectorMap.get(objectInjectorType) != null ? objectInjectorMap.get(objectInjectorType).get(parameterType) : null;
                 if (objectInjector == null) {
                     objectInjector = objectInjectorMap.get("all") != null ? objectInjectorMap.get("all").get(parameterType) : null;
@@ -160,10 +173,12 @@ public class BotFactory implements ApplicationContextAware, DisposableBean {
                 if (objectInjector == null) {
                     objects[i] = null;
                 } else {
+                    // 调用对象注入器的 getObject() 方法获取参数对象，并将其存入数组中
                     objects[i] = objectInjector.getObject(event, bot);
                 }
             }
             try {
+                // 调用处理器方法，传入参数数组，并将结果添加到结果列表中
                 resultList.add(handlerMethod.getMethod().invoke(handlerMethod.getObject(), objects));
             } catch (IllegalAccessException | InvocationTargetException e) {
                 Throwable cause = e.getCause();
