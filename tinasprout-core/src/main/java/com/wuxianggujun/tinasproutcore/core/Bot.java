@@ -220,6 +220,14 @@ public class Bot {
         }
     }
 
+    public void deleteFriend(long userId) {
+        this.botClient.invokeApi(new DeleteFriend(userId), this);
+    }
+
+    public void setFriendAddRequest(String flag, boolean approve, String remark) {
+        this.botClient.invokeApi(new SetFriendAddRequest(flag, approve, remark), this);
+    }
+
     public Collection<Friend> getFriends() {
         try {
             if (!this.completableFuture.isDone()) {

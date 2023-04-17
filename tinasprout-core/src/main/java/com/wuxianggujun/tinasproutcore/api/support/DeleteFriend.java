@@ -7,24 +7,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author xiaoxu
- * @since 2022-05-24 10:19
- * 
- * 群全员禁言 wuxianggujun
- */
-public class GroupBan extends BaseApi {
+ * @author WuXiangGuJun
+ * @create 2023-04-18 0:43
+ * 删除好友 wuxianggujun
+ **/
+
+public class DeleteFriend extends BaseApi {
 
     private final Param param;
 
-    public GroupBan(long groupId, boolean enable) {
+    public DeleteFriend(long userId) {
         this.param = new Param();
-        this.param.setGroupId(groupId);
-        this.param.setEnable(enable);
+        this.param.userId = userId;
     }
 
     @Override
     public String getAction() {
-        return "set_group_whole_ban";
+        return "delete_friend";
     }
 
     @Override
@@ -36,11 +35,8 @@ public class GroupBan extends BaseApi {
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Param {
 
-        @JSONField(name = "group_id")
-        private long groupId;
-
-        @JSONField(name = "enable")
-        private boolean enable = true;
+        @JSONField(name = "user_id")
+        private long userId;
 
     }
 }

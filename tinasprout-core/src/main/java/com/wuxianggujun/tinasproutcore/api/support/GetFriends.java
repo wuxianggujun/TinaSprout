@@ -5,6 +5,7 @@ import com.wuxianggujun.tinasproutcore.api.BaseApi;
 /**
  * @author xiaoxu
  * @since 2022-05-24 10:19
+ * 获取好友列表
  */
 public class GetFriends extends BaseApi {
 

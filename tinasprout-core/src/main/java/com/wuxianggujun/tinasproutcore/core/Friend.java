@@ -24,4 +24,10 @@ public class Friend implements Contact {
     public int sendMessage(MessageChain messageChain) {
         return this.bot.sendPrivateMessage(this.userId, messageChain);
     }
+
+    public void deleteFriend() {
+        if (userId != 0) {
+            this.bot.deleteFriend(userId);
+        }
+    }
 }
