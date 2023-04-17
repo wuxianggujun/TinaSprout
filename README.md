@@ -133,3 +133,6 @@ bot:
 
 * Group 被撤回的消息所在的群实例
 * UserAddMessage 包含操作管理员以及入群用户的id**
+
+### @AddFriendHandler
+> 有用户要添加你为好友时，执行该方法

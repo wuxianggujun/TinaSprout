@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CommandEventInterceptor implements EventInterceptor {
     
-
     @Override
     public void postHandle(EventHandler eventHandler, JSONObject jsonObject, Bot bot) {
         log.info(jsonObject.toString());

@@ -6,8 +6,8 @@ import com.wuxianggujun.tinasproutcore.api.ApiResult;
 import com.wuxianggujun.tinasproutcore.command.interceptor.EventInterceptor;
 import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.core.network.ws.WsBotClient;
+import com.wuxianggujun.tinasproutcore.event.meta.HeartbeatEvent;
 import com.wuxianggujun.tinasproutcore.handler.EventHandler;
-import com.wuxianggujun.tinasproutcore.handler.meta.HeartbeatEventHandler;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +64,7 @@ public class BotDispatcher {
                 try {
                     for (EventHandler eventHandler : eventHandlerMap.values()) {
                         //别问，问就是如果将心跳包加进去。tmd 判断事件太麻烦了
-                        if (eventHandler instanceof HeartbeatEventHandler) {
+                        if (HeartbeatEvent.isSupport(jsonObject)) {
                             eventHandler.handle(jsonObject, bot);
                             continue;
                         }

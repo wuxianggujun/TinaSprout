@@ -1,5 +1,6 @@
 package com.wuxianggujun.tinasproutrobot;
 
+import com.wuxianggujun.tinasproutcore.annotation.AddFriendHandler;
 import com.wuxianggujun.tinasproutcore.annotation.FriendMessageHandler;
 import com.wuxianggujun.tinasproutcore.annotation.GroupMessageHandler;
 import com.wuxianggujun.tinasproutcore.command.CommandParams;
@@ -22,7 +23,7 @@ public class MessageTest {
     @GroupMessageHandler(groupIds = {864358403})
     public void test(Group group, Member member, MessageChain messageChain, String message, Integer id) {
         group.sendMessage(messageChain);
-    } 
+    }
 
 
     @CommandHandler(command = "add")
@@ -32,5 +33,10 @@ public class MessageTest {
         message.add(new TextMessage(messageChain.toMessageString()));
         message.add(new TextMessage(commandParams.getName()));
         friend.sendMessage(message);
+    }
+
+    @AddFriendHandler()
+    public void FromFriendRequest() {
+        log.info("请求添加好友");
     }
 }

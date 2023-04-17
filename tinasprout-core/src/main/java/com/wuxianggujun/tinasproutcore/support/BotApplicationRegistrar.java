@@ -1,6 +1,7 @@
 package com.wuxianggujun.tinasproutcore.support;
 
 import com.wuxianggujun.tinasproutcore.command.injector.CommandParamsInjector;
+import com.wuxianggujun.tinasproutcore.command.interceptor.CommandEventInterceptor;
 import com.wuxianggujun.tinasproutcore.core.component.BotDispatcher;
 import com.wuxianggujun.tinasproutcore.core.component.BotFactory;
 import com.wuxianggujun.tinasproutcore.core.component.BotInit;
@@ -36,7 +37,7 @@ public class BotApplicationRegistrar implements ImportSelector {
                 BotFactory.class.getName(),
                 BotDispatcher.class.getName(),
                 SnowFlakeIdGenerator.class.getName(),
-                //CommandEventInterceptor.class.getName(),
+                CommandEventInterceptor.class.getName(),
                 HeartbeatEventHandler.class.getName(),
                 PrivateMessageEventHandler.class.getName(),
                 GroupMessageEventHandler.class.getName(),
