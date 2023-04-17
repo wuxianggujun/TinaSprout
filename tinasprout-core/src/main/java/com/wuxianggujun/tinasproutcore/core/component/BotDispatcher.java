@@ -3,7 +3,6 @@ package com.wuxianggujun.tinasproutcore.core.component;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wuxianggujun.tinasproutcore.api.ApiResult;
-import com.wuxianggujun.tinasproutcore.command.interceptor.EventInterceptor;
 import com.wuxianggujun.tinasproutcore.core.Bot;
 import com.wuxianggujun.tinasproutcore.core.network.ws.WsBotClient;
 import com.wuxianggujun.tinasproutcore.handler.EventHandler;
@@ -32,13 +31,10 @@ public class BotDispatcher {
 
     private ExecutorService executorService;
 
-    private final List<EventInterceptor> interceptors;
 
     @PostConstruct
     public void init() {
         this.executorService = Executors.newFixedThreadPool(4);
-        //通过对拦截器排序 越小的越靠前 默认为 5 我自己的定义为1,0是给用户替换框架内定义的拦截器
-        interceptors.sort(Comparator.comparingInt(EventInterceptor::getPriority));
     }
 
     public void handle(String message) {
@@ -63,28 +59,7 @@ public class BotDispatcher {
             this.executorService.submit(() -> {
                 try {
                     for (EventHandler eventHandler : eventHandlerMap.values()) {
-                        //别问，问就是如果将心跳包加进去。tmd 判断事件太麻烦了
-                        if (eventHandler instanceof HeartbeatEventHandler) {
-                            eventHandler.handle(jsonObject, bot);
-                            continue;
-                        }
-
-                        boolean continueHandle = true;
-
-                        for (EventInterceptor interceptor : interceptors) {
-                            continueHandle = interceptor.preHandle(eventHandler, jsonObject, bot);
-                            if (!continueHandle) {
-                                break;
-                            }
-                        }
-
-                        if (continueHandle) {
-                            eventHandler.handle(jsonObject, bot);
-                            for (EventInterceptor interceptor : interceptors) {
-                                interceptor.postHandle(eventHandler, jsonObject, bot);
-                            }
-                        }
-
+                        eventHandler.handle(jsonObject, bot);
                     }
                 } catch (Exception e) {
                     log.error(e.getMessage(), e);

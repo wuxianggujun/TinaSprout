@@ -1,14 +1,10 @@
 package com.wuxianggujun.tinasproutcore.support;
 
-import com.wuxianggujun.tinasproutcore.command.interceptor.CommandEventInterceptor;
 import com.wuxianggujun.tinasproutcore.core.component.BotDispatcher;
 import com.wuxianggujun.tinasproutcore.core.component.BotFactory;
 import com.wuxianggujun.tinasproutcore.core.component.BotInit;
 import com.wuxianggujun.tinasproutcore.core.component.SnowFlakeIdGenerator;
-import com.wuxianggujun.tinasproutcore.handler.message.GroupMessageEventHandler;
-import com.wuxianggujun.tinasproutcore.handler.message.GroupRecallEventHandler;
-import com.wuxianggujun.tinasproutcore.handler.message.MemberAddEventHandler;
-import com.wuxianggujun.tinasproutcore.handler.message.PrivateMessageEventHandler;
+import com.wuxianggujun.tinasproutcore.handler.message.*;
 import com.wuxianggujun.tinasproutcore.handler.meta.HeartbeatEventHandler;
 import com.wuxianggujun.tinasproutcore.injector.support.*;
 import com.wuxianggujun.tinasproutcore.injector.support.friend.FriendInjector;
@@ -36,7 +32,6 @@ public class BotApplicationRegistrar implements ImportSelector {
                 BotFactory.class.getName(),
                 BotDispatcher.class.getName(),
                 SnowFlakeIdGenerator.class.getName(),
-                CommandEventInterceptor.class.getName(),
                 HeartbeatEventHandler.class.getName(),
                 PrivateMessageEventHandler.class.getName(),
                 GroupMessageEventHandler.class.getName(),
@@ -44,6 +39,7 @@ public class BotApplicationRegistrar implements ImportSelector {
                 MemberAddEventHandler.class.getName(),
                 RecallMessageInjector.class.getName(),
                 BotInit.class.getName(),
+                AddFriendEventHandler.class.getName(),
                 MessageStringInjector.class.getName(),
                 GroupInjector.class.getName(),
                 MessageChainInjector.class.getName(),

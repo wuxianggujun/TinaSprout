@@ -1,7 +1,6 @@
 package com.wuxianggujun.tinasproutrobot;
 
 import com.wuxianggujun.tinasproutcore.annotation.GroupMessageHandler;
-import com.wuxianggujun.tinasproutcore.command.annotion.CommandHandler;
 import com.wuxianggujun.tinasproutcore.core.Group;
 import com.wuxianggujun.tinasproutcore.core.Member;
 import com.wuxianggujun.tinasproutcore.message.MessageChain;
@@ -19,9 +18,4 @@ public class MessageTest {
         System.out.println(group.getGroupName() + " | " + member.getNickname());
     }
 
-
-    @CommandHandler(command = "add")
-    public void Command() {
-        System.out.println("我是命令");
-    }
 }

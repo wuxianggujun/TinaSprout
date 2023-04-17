@@ -8,6 +8,7 @@ import com.wuxianggujun.tinasproutcore.config.BotConfig;
 import com.wuxianggujun.tinasproutcore.core.network.BotClient;
 import com.wuxianggujun.tinasproutcore.exception.BotException;
 import com.wuxianggujun.tinasproutcore.message.CacheMessage;
+import com.wuxianggujun.tinasproutcore.message.FriendMessage;
 import com.wuxianggujun.tinasproutcore.message.MessageChain;
 import com.wuxianggujun.tinasproutcore.message.support.ForwardNodeMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -353,6 +354,10 @@ public class Bot {
         this.botClient.invokeApi(new DeleteMsg(messageId), this);
     }
 
+
+    public void addFriend(FriendMessage message) {
+        this.botClient.invokeApi(new AddFriendMsg(message),this);
+    }
     public void setGroupCard(long groupId, long userId, String card) {
         this.botClient.invokeApi(new SetGroupCard(groupId, userId, card), this);
     }
