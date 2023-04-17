@@ -23,8 +23,7 @@ public class FriendInjector implements ObjectInjector<Friend> {
 
     @Override
     public Friend getObject(BaseEvent event, Bot bot) {
-        if (event instanceof PrivateMessageEvent) {
-            PrivateMessageEvent privateMessageEvent = (PrivateMessageEvent) event;
+        if (event instanceof PrivateMessageEvent privateMessageEvent) {
             return bot.getFriend(privateMessageEvent.getUserId());
         }
         return null;

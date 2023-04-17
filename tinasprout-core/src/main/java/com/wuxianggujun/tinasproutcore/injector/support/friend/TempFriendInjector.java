@@ -23,8 +23,7 @@ public class TempFriendInjector implements ObjectInjector<TempFriend> {
 
     @Override
     public TempFriend getObject(BaseEvent event, Bot bot) {
-        if (event instanceof PrivateMessageEvent) {
-            PrivateMessageEvent privateMessageEvent = (PrivateMessageEvent) event;
+        if (event instanceof PrivateMessageEvent privateMessageEvent) {
             if ("group".equals(privateMessageEvent.getSubType())) {
                 return new TempFriend(privateMessageEvent.getUserId(), bot);
             }
