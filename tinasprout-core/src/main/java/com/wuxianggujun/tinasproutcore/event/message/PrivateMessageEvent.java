@@ -16,18 +16,23 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 public class PrivateMessageEvent extends MessageEvent {
 
+    //表示消息的子类型
     @JSONField(name = "sub_type")
     private String subType;
 
+    //一个消息链
     @JSONField(name = "message")
     private JSONArray message;
 
+    //CQ码格式的消息
     @JSONField(name = "raw_message")
     private String rawMessage;
 
+    //字体
     @JSONField(name = "font")
     private Integer font;
 
+    //发送者消息
     @JSONField(name = "sender")
     private JSONObject sender;
 

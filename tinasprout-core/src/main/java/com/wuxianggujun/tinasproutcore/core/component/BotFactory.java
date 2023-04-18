@@ -160,7 +160,6 @@ public class BotFactory implements ApplicationContextAware, DisposableBean {
         for (HandlerMethod handlerMethod : handlerMethodSet) {
             //返回一个Class对象数组，这些对象按声明顺序表示此对象表示的可执行文件的形式参数类型。如果底层可执行文件不带参数，则返回长度为 0 的数组
             Class<?>[] parameterTypes = handlerMethod.getMethod().getParameterTypes();
-            
             Object[] objects = new Object[parameterTypes.length];
             for (int i = 0; i < parameterTypes.length; i++) {
                 //获取当前参数的类型

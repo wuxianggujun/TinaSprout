@@ -24,17 +24,8 @@ public class AddFriendEvent extends MessageEvent {
 
 
     public static boolean isSupport(JSONObject jsonObject) {
-
         return (("request").equals(jsonObject.getString("post_type"))
                 && "friend".equals(jsonObject.getString("request_type")));
-
-
     }
 
-    public String toString() {
-        return "{" + "Frag:" + frag +
-                "Approve:" +  approve +
-                "Comment:" + message +
-                "Remark:" + remark + "}";
-    }
 }

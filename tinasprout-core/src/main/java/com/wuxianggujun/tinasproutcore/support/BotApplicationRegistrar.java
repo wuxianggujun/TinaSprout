@@ -40,7 +40,6 @@ public class BotApplicationRegistrar implements ImportSelector {
                 RecallMessageInjector.class.getName(),
                 BotInit.class.getName(),
                 AddFriendEventHandler.class.getName(),
-                AddFriendInjector.class.getName(),
                 MessageStringInjector.class.getName(),
                 GroupInjector.class.getName(),
                 MessageChainInjector.class.getName(),

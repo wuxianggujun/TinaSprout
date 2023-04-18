@@ -30,4 +30,5 @@ public class Friend implements Contact {
             this.bot.deleteFriend(userId);
         }
     }
+    
 }

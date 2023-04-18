@@ -15,12 +15,15 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 public class MessageEvent extends BaseEvent {
 
+    //消息ID
     @JSONField(name = "message_id")
     private Integer messageId;
 
+    //消息类型
     @JSONField(name = "message_type")
     private String messageType;
 
+    //发送者信息
     @JSONField(name = "user_id")
     private Long userId;
 
